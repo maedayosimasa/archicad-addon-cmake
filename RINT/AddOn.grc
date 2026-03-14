@@ -10,12 +10,28 @@
 /* [  2] */ "maeda AddOn Command..."
 }
 
-'GDLG' ID_ADDON_DLG Modal  0  0  320  150  "maeda AddOn" {
-/* [  1] */ Button          110  110   100   23   LargePlain  "OK"
-/* [  2] */ LeftText        20   30    280   50   LargePlain  "Welcome to Archicad 28 AddOn Development!\nDialog display successful."
+'GDLG' ID_ADDON_DLG Modal  0  0  320  400  "Element Counter Pro" {
+/* [  1] */ Button          110  360   100   23   LargePlain  "Search"
+/* [  2] */ LeftText        30   260   260   90   LargePlain  "Results will appear here."
+/* [  3] */ CheckBox        40   20    200   20   LargePlain  "Walls"
+/* [  4] */ CheckBox        40   45    200   20   LargePlain  "Columns"
+/* [  5] */ CheckBox        40   70    200   20   LargePlain  "Beams"
+/* [  6] */ CheckBox        40   95    200   20   LargePlain  "Slabs"
+/* [  7] */ CheckBox        40   110   200   20   LargePlain  "Roofs"
+/* [  8] */ CheckBox        40   135   200   20   LargePlain  "Objects"
+/* [  9] */ CheckBox        40   160   200   20   LargePlain  "Windows"
+/* [ 10] */ CheckBox        40   185   200   20   LargePlain  "Doors"
 }
 
 'DLGH' ID_ADDON_DLG DLG_Example {
-1 "" Button_OK
-2 "" LeftText_Message
+1 "" 0
+2 "" 0
+3 "" 0
+4 "" 0
+5 "" 0
+6 "" 0
+7 "" 0
+8 "" 0
+9 "" 0
+10 "" 0
 }
