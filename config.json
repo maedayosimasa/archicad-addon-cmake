@@ -4,10 +4,21 @@
     "languages": [
         "INT"
     ],
-    "version": "0.0.0",
+    "version": "1.0.0",
     "copyright": {
-        "name": "Graphisoft SE",
-        "year": "1984-%Y"
+        "name": "YourName",
+        "year": "2026"
     },
-    "description": "Example Archicad addon"
+    "description": "Example Archicad addon",
+    "archicad_configs": {
+        "28": {
+            "platforms": [
+                "Win64"
+            ],
+            "build_targets": [
+                "Release",
+                "Debug"
+            ]
+        }
+    }
 }
