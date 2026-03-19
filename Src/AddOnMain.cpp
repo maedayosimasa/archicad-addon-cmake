@@ -1,51 +1,47 @@
 ﻿#include "APIEnvir.h"
 #include "ACAPinc.h"
-#include "ResourceIds.hpp"
+#include "RS.hpp"
 #include "ExampleDialog.hpp"
 
-#ifndef AD_CALL
-#define AD_CALL __stdcall
-#endif
-
-// メニューコマンド実行時の処理
-static GSErrCode AD_CALL MenuCommandHandler (const API_MenuParams* menuParams)
+// -----------------------------------------------------------------------------
+// メニューコマンドハンドラ
+// -----------------------------------------------------------------------------
+static GSErrCode MenuCommandHandler (const API_MenuParams* /*menuParams*/)
 {
-    if (menuParams->menuItemRef.itemIndex == 1) {
-        ExampleDialog dialog;
-        dialog.Invoke ();
-    }
+// この行を削除（またはコメントアウト）すれば「警告！」は出なくなります
+    // ACAPI_WriteReport ("Menu clicked: Opening Dialog...", true);
+
+    ExampleDialog dialog;
+    dialog.Invoke ();
+
     return NoError;
 }
 
-extern "C" {
+// -----------------------------------------------------------------------------
+// Archicad エクスポート関数（extern "C" や __ACENV_CALL は一切不要です）
+// -----------------------------------------------------------------------------
 
-    // アドオンの読み込み準備
-    API_AddonType AD_CALL CheckEnvironment (API_EnvirParams* envir)
-    {
-        // 余計な関数は不要です。UniStringへの読み込み（&付き）のみ行います。
-        RSGetIndString (&envir->addOnInfo.name, ID_ADDON_INFO, 1, ACAPI_GetOwnResModule ());
-        RSGetIndString (&envir->addOnInfo.description, ID_ADDON_INFO, 2, ACAPI_GetOwnResModule ());
+API_AddonType CheckEnvironment (API_EnvirParams* envir)
+{
+    // 正しい関数 ACAPI_GetOwnResModule() を使用
+    RSGetIndString (&envir->addOnInfo.name, 32000, 1, ACAPI_GetOwnResModule ());
+    RSGetIndString (&envir->addOnInfo.description, 32000, 2, ACAPI_GetOwnResModule ());
+    
+    return APIAddon_Normal;
+}
 
-        return APIAddon_Normal;
-    }
+GSErrCode RegisterInterface (void)
+{
+    // 正しい定数 MenuCode_Tools を使用
+    return ACAPI_MenuItem_RegisterMenu (32500, 0, MenuCode_Tools, MenuFlag_Default);
+}
 
-    // メニューの登録
-    GSErrCode AD_CALL RegisterInterface (void)
-    {
-        // AC28公式テンプレートに則り、「MenuCode_Tools」を使用します
-        return ACAPI_MenuItem_RegisterMenu (ID_ADDON_MENU, 0, MenuCode_Tools, MenuFlag_Default);
-    }
+GSErrCode Initialize (void)
+{
+    return ACAPI_MenuItem_InstallMenuHandler (32500, MenuCommandHandler);
+}
 
-    // 初期化（ハンドラーの設置）
-    GSErrCode AD_CALL Initialize (void)
-    {
-        return ACAPI_MenuItem_InstallMenuHandler (ID_ADDON_MENU, MenuCommandHandler);
-    }
-
-    // 終了処理
-    GSErrCode AD_CALL FreeData (void)
-    {
-        return NoError;
-    }
-
-} // extern "C"
+GSErrCode FreeData (void)
+{
+    return NoError;
+}
