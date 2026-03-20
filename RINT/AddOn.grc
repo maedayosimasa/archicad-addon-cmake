@@ -1,37 +1,28 @@
-﻿#include "ResourceIds.hpp"
-
-'STR#' ID_ADDON_INFO "Add-on Name and Description" {
-/* [  1] */ "maeda AddOn"
-/* [  2] */ "maeda AddOn Description V-002"
+﻿/* --- アドオン名と説明 (ID: 32000) --- */
+'STR#' 32000 "Add-on Name and Description" {
+    /* [  1] */ "maeda AddOn"
+    /* [  2] */ "maeda AddOn Description v-002"
 }
 
-'STR#' ID_ADDON_MENU "Strings for the Menu" {
-/* [  1] */ "maeda AddOn Group"
-/* [  2] */ "maeda AddOn Command..."
+/* --- メニュー構成 (ID: 32500) --- */
+'STR#' 32500 "Menu Strings" {
+    /* [   ] */ "Test"
+    /* [   ] */ "maeda AddOn Group"
+    /* [  1] */ "maeda AddOn Command...^E3"
 }
 
-'GDLG' ID_ADDON_DLG Modal  0  0  320  400  "Element Counter Pro" {
-/* [  1] */ Button          110  360   100   23   LargePlain  "Search"
-/* [  2] */ LeftText        30   260   260   90   LargePlain  "Results will appear here."
-/* [  3] */ CheckBox        40   20    200   20   LargePlain  "Walls"
-/* [  4] */ CheckBox        40   45    200   20   LargePlain  "Columns"
-/* [  5] */ CheckBox        40   70    200   20   LargePlain  "Beams"
-/* [  6] */ CheckBox        40   95    200   20   LargePlain  "Slabs"
-/* [  7] */ CheckBox        40   110   200   20   LargePlain  "Roofs"
-/* [  8] */ CheckBox        40   135   200   20   LargePlain  "Objects"
-/* [  9] */ CheckBox        40   160   200   20   LargePlain  "Windows"
-/* [ 10] */ CheckBox        40   185   200   20   LargePlain  "Doors"
+/* --- ダイアログ定義 (ID: 32500) --- */
+'GDLG' 32500 Modal | noGrow 0 0 350 450 "Element Counter Pro" {
+    /* [  1] */ Button      125  410  100  23   LargePlain  "Search"
+    /* [  2] */ LeftText     20  330  310  70   LargePlain  vTop  "Select types and click Search."
+    
+    /* 【修正】SingleSelListに戻します */
+    /* [  3] */ SingleSelList 20  20  310  300  LargePlain  PartialItems  VScroll  21
 }
 
-'DLGH' ID_ADDON_DLG DLG_Example {
-1 "" 0
-2 "" 0
-3 "" 0
-4 "" 0
-5 "" 0
-6 "" 0
-7 "" 0
-8 "" 0
-9 "" 0
-10 "" 0
+/* --- ダイアログヘルプ/アンカー (ID: 32500) --- */
+'DLGH' 32500 AddOn_Anchor {
+    1 "" Button_01
+    2 "" LeftText_02
+    3 "" List_03
 }

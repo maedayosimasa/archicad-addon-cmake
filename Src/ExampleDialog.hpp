@@ -1,5 +1,4 @@
-﻿#ifndef EXAMPLEDIALOG_HPP
-#define EXAMPLEDIALOG_HPP
+﻿#pragma once
 
 #include "DG.h"
 #include "DGDialog.hpp"
@@ -12,20 +11,23 @@
 
 class ExampleDialog : public DG::ModalDialog,
                       public DG::PanelObserver,
-                      public DG::ButtonItemObserver
+                      public DG::ButtonItemObserver,
+                      public DG::ListBoxObserver
 {
 private:
-    DG::Button              searchButton;
-    DG::LeftText            messageLabel;
-    DG::SingleSelListBox    elementList;
+    DG::Button             searchButton;
+    DG::LeftText           messageLabel;
+    
+    // 【修正】保護されたベースクラスではなく SingleSelListBox を使用します
+    DG::SingleSelListBox   elementList;  
 
 public:
+    GS::Array<API_ElemType> selectedTypes;
+
     ExampleDialog ();
     virtual ~ExampleDialog ();
 
     virtual void PanelOpened (const DG::PanelOpenEvent& ev) override;
-    // ButtonClickEvent に戻して整合性をとります
     virtual void ButtonClicked (const DG::ButtonClickEvent& ev) override;
+    virtual void ListBoxSelectionChanged (const DG::ListBoxSelectionEvent& ev) override;
 };
-
-#endif
