@@ -2,7 +2,8 @@
     "addOnName": "ExampleAddOn",
     "defaultLanguage": "INT",
     "languages": [
-        "INT"
+        "INT",
+        "JPN"
     ],
     "version": "1.0.0",
     "copyright": {
