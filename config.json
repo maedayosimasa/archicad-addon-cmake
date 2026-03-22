@@ -8,6 +8,29 @@
     },
     "defaultLanguage": "INT",
     "languages": [
+<<<<<<< HEAD
         "INT"
     ]
+=======
+        "INT",
+        "JPN"
+    ],
+    "version": "1.0.0",
+    "copyright": {
+        "name": "MaedaYosimasa",
+        "year": "2026"
+    },
+    "description": "Example Archicad addon",
+    "archicad_configs": {
+        "28": {
+            "platforms": [
+                "Win64"
+            ],
+            "build_targets": [
+                "Release",
+                "Debug"
+            ]
+        }
+    }
+>>>>>>> f6aad847eb0dc3cdce4896ebd551ec7e964078e9
 }

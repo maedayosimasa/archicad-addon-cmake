@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿#include "ResourceIds.hpp"
 
 /* ========================================================================= */
@@ -38,4 +39,33 @@
 6    "Slab Check"       Slab_Anchor
 7    "WinDoor Check"    WD_Anchor
 8    "Object Check"     Obj_Anchor
+=======
+﻿/* --- アドオン名と説明 (ID: 32000) --- */
+'STR#' 32000 "Add-on Name and Description" {
+    /* [  1] */ "maeda AddOn"
+    /* [  2] */ "maeda AddOn Description v-002"
+}
+
+/* --- メニュー構成 (ID: 32500) --- */
+'STR#' 32500 "Menu Strings" {
+    /* [   ] */ "Test"
+    /* [   ] */ "maeda AddOn Group"
+    /* [  1] */ "maeda AddOn Command...^E3"
+}
+
+/* --- ダイアログ定義 (ID: 32500) --- */
+'GDLG' 32500 Modal | noGrow 0 0 350 450 "Element Counter Pro" {
+    /* [  1] */ Button      125  410  100  23   LargePlain  "Search"
+    /* [  2] */ LeftText     20  330  310  70   LargePlain  vTop  "Select types and click Search."
+    
+    /* 【修正】SingleSelListに戻します */
+    /* [  3] */ SingleSelList 20  20  310  300  LargePlain  PartialItems  VScroll  21
+}
+
+/* --- ダイアログヘルプ/アンカー (ID: 32500) --- */
+'DLGH' 32500 AddOn_Anchor {
+    1 "" Button_01
+    2 "" LeftText_02
+    3 "" List_03
+>>>>>>> f6aad847eb0dc3cdce4896ebd551ec7e964078e9
 }
