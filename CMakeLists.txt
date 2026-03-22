@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.19)
+﻿cmake_minimum_required (VERSION 3.19)
 
 include (Tools/CMakeCommon.cmake)
 
@@ -24,4 +24,25 @@ set (AddOnResourcesFolder .)
 
 set (PCH_HEADER "Src/ExamplePrecompiledHeader.hpp")
 
-GenerateAddOnProject (CMakeTarget ${AC_VERSION} "${AC_API_DEVKIT_DIR}" ${AddOnSourcesFolder} ${AddOnResourcesFolder} ${AC_ADDON_LANGUAGE} ${addOnDefaultLanguage} ${PCH_HEADER})
+# ✔ 使用モジュール（このままでOK）
+set (AC_ADDON_USED_MODULES
+    DialogManager
+    GSRoot
+    InputOutput
+)
+
+# ✔ これが全てを構築する（最重要）
+GenerateAddOnProject (
+    CMakeTarget
+    ${AC_VERSION}
+    "${AC_API_DEVKIT_DIR}"
+    ${AddOnSourcesFolder}
+    ${AddOnResourcesFolder}
+    ${AC_ADDON_LANGUAGE}
+    ${addOnDefaultLanguage}
+    ${PCH_HEADER}
+)
+
+# ❌ 以下は削除すること（絶対）
+# target_include_directories(...)
+# target_link_libraries(...)

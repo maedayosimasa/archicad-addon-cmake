@@ -1,22 +1,41 @@
 ﻿#include "ResourceIds.hpp"
 
-'STR#' ID_ADDON_INFO "Add-on Name and Description" {
-/* [  1] */		"Example AddOn"
-/* [  2] */		"Example AddOn Description..."
+/* ========================================================================= */
+/* 1. アドオン情報                                                           */
+/* ========================================================================= */
+'STR#' 32000 "Add-on Name and Description" {
+/* [  1] */		"maeda AddOn"
+/* [  2] */		"maeda AddOn Description v-001"
 }
 
-'STR#' ID_ADDON_MENU "Strings for the Menu" {
-/* [  1] */		"Example AddOn Command... ^E3 ^ES ^EE ^EI ^ED ^ET ^10001"
+/* ========================================================================= */
+/* 2. メニュー                                                               */
+/* ========================================================================= */
+'STR#' 32500 "Menu Strings" {
+/* [  1] */		"maeda Test"
+/* [  2] */		"maeda Search Dialog..."
 }
 
-'GDLG' ID_ADDON_DLG Modal | grow   40   40  345  128  "" {
-/* [  1] */ Button				  245   95   90   23	LargePlain  "OK"
-/* [  2] */ Button				  145   95   90   23	LargePlain  "Cancel"
-/* [  3] */ Separator			   10   83  325    2
+/* ダイアログ本体 */
+'GDLG'  32501  Modal | noGrow     40   40  250  460  "Element Search" {
+/* [  1] */ SingleSelTreeView  10   10  230  250  LargePlain 16 16 16 16 noLabelEdit noDragDrop 80 noRootButton
+/* [  2] */ Button           150  420   90   25  LargePlain  "Search"
+/* [  3] */ CheckBox          10  270  230   20  LargePlain  "Walls"
+/* [  4] */ CheckBox          10  290  230   20  LargePlain  "Columns"
+/* [  5] */ CheckBox          10  310  230   20  LargePlain  "Beams"
+/* [  6] */ CheckBox          10  330  230   20  LargePlain  "Slabs"
+/* [  7] */ CheckBox          10  350  230   20  LargePlain  "Windows / Doors"
+/* [  8] */ CheckBox          10  370  230   20  LargePlain  "Objects"
 }
 
-'DLGH' ID_ADDON_DLG DLG_Example {
-1	""		Button_0
-2	""		Button_1
-3	""		Separator_0
+/* ヘルプ定義 (AC28では大文字 'DLGH' と Anchor が必須) */
+'DLGH'  32501  DLG_32501_Example {
+1    "Result List"      Tree_Anchor
+2    "Search Button"    Btn_Anchor
+3    "Wall Check"       Wall_Anchor
+4    "Column Check"     Col_Anchor
+5    "Beam Check"       Beam_Anchor
+6    "Slab Check"       Slab_Anchor
+7    "WinDoor Check"    WD_Anchor
+8    "Object Check"     Obj_Anchor
 }

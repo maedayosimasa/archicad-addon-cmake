@@ -1,14 +1,13 @@
-{
-    "addOnName": "ExampleAddOn",
+﻿{
+    "version": "1.0.0",
+    "addOnName": "maedaAddOn",
+    "description": "maeda AddOn Description v-001",
+    "copyright": {
+        "name": "maeda",
+        "year": "2026"
+    },
     "defaultLanguage": "INT",
     "languages": [
-        "INT",
-        "JPN"
-    ],
-    "version": "0.0.0",
-    "copyright": {
-        "name": "Graphisoft SE",
-        "year": "1984-%Y"
-    },
-    "description": "Example Archicad addon"
+        "INT"
+    ]
 }

@@ -1,6 +1,12 @@
-#ifndef GS_EXAMPLE_PRECOMPILED_HEADER_HPP
+﻿#ifndef GS_EXAMPLE_PRECOMPILED_HEADER_HPP
 #define GS_EXAMPLE_PRECOMPILED_HEADER_HPP
+#pragma once
+// ★ 最優先（これを一番上）
+#include "ACAPinc.h"
 
+// ★ API個別ヘッダは後
+#include "APIEnvir.h"
+#include "APIdefs_Environment.h"
 #include <GSNew.hpp>
 #include <GSMalloc.hpp>
 
@@ -24,8 +30,5 @@ namespace std {
 #if defined(WINDOWS)
 #include "Win32Interface.hpp"
 #endif
-
-#include "APIEnvir.h"
-#include "ACAPinc.h"
 
 #endif // GS_EXAMPLE_PRECOMPILED_HEADER_HPP
