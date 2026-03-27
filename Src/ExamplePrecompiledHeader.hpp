@@ -1,33 +1,54 @@
-﻿#ifndef GS_EXAMPLE_PRECOMPILED_HEADER_HPP
+﻿#pragma once
+
+#ifndef GS_EXAMPLE_PRECOMPILED_HEADER_HPP
 #define GS_EXAMPLE_PRECOMPILED_HEADER_HPP
-#pragma once
-// ★ 最優先（これを一番上）
+
+// ======================================================
+// ① 最重要：Archicad API
+// ======================================================
 #include "ACAPinc.h"
 
-// ★ API個別ヘッダは後
-#include "APIEnvir.h"
-#include "APIdefs_Environment.h"
-#include <GSNew.hpp>
-#include <GSMalloc.hpp>
-
-#if defined (macintosh)
-namespace std {
-    void *GS_realloc (void *userData, size_t newSize);
-}
-#endif
-
+// ======================================================
+// ② 標準ライブラリ
+// ======================================================
 #include <limits.h>
 #include <math.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include <string>
 #include <vector>
 #include <unordered_map>
 #include <memory>
 
-#if defined(WINDOWS)
+// ======================================================
+// ③ GSRoot（Archicad基盤）
+// ======================================================
+#include "GSRoot.hpp"
+#include "Array.hpp"
+#include "UniString.hpp"
+
+// ======================================================
+// ④ DG（UI系）
+// ======================================================
+#include "DGModule.hpp"
+#include "DGDialog.hpp"
+#include "DGListBox.hpp"
+#include "DGTreeView.hpp"
+#include "DGCheckItem.hpp"
+#include "DGButton.hpp"
+
+// ======================================================
+// ⑤ BM（重要：BMMin用）
+// ======================================================
+#include "BM.hpp"
+
+// ======================================================
+// ⑥ Windows専用
+// ======================================================
+#if defined (WINDOWS)
 #include "Win32Interface.hpp"
 #endif
 

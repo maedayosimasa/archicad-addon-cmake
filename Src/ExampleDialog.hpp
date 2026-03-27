@@ -12,12 +12,17 @@
 
 #include "ResourceIds.hpp"
 
+struct Filter {
+    API_ElemTypeID id;
+    DG::CheckBox* cb;
+    const char* name;
+};
+
 class ExampleDialog : public DG::ModalDialog,
                       public DG::PanelObserver,
                       public DG::ButtonItemObserver
 {
 private:
-    // ✔ TreeView修正済
     DG::SingleSelTreeView resultTree;
 
     DG::Button      searchButton;
@@ -28,6 +33,9 @@ private:
     DG::CheckBox    winDoorCheck;
     DG::CheckBox    objectCheck;
 
+    // ★ポインタに変更（重要）
+    DG::CheckBox* storyChecks[4];
+
 public:
     ExampleDialog ();
     virtual ~ExampleDialog ();
@@ -37,6 +45,9 @@ public:
 
 private:
     void RefreshElementList ();
+    GS::Array<Filter> GetSelectedFilters ();
+    GS::Array<short> GetSelectedStories ();
+    void BuildTree (const char* name, const GS::Array<API_Guid>& guids);
 };
 
 #endif

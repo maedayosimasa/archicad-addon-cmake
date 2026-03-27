@@ -42,7 +42,3 @@ GenerateAddOnProject (
     ${addOnDefaultLanguage}
     ${PCH_HEADER}
 )
-
-# ❌ 以下は削除すること（絶対）
-# target_include_directories(...)
-# target_link_libraries(...)
