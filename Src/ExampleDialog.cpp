@@ -32,12 +32,13 @@ ExampleDialog::ExampleDialog () :
     Attach (*this);
     searchButton.Attach (*this);
 
-    wallCheck.Check ();
-    columnCheck.Check ();
-    beamCheck.Check ();
-    slabCheck.Check ();
-    winDoorCheck.Check ();
-    objectCheck.Check ();
+// 修正後：すべて Uncheck() に変更
+    wallCheck.Uncheck ();
+    columnCheck.Uncheck ();
+    beamCheck.Uncheck ();
+    slabCheck.Uncheck ();
+    winDoorCheck.Uncheck ();
+    objectCheck.Uncheck ();
 }
 
 ExampleDialog::~ExampleDialog ()
@@ -55,12 +56,15 @@ ExampleDialog::~ExampleDialog ()
 void ExampleDialog::PanelOpened (const DG::PanelOpenEvent&)
 {
     auto stories = StoryService::GetAllStories ();
-
     Int32 count = std::min ((Int32)stories.GetSize (), 4);
 
     for (Int32 i = 0; i < count; i++) {
         storyChecks[i]->SetText (stories[i].name);
-        storyChecks[i]->Check ();
+        
+        // 修正前：storyChecks[i]->Check ();
+        // 修正後：初期状態でオフにする
+        storyChecks[i]->Uncheck (); 
+        
         storyChecks[i]->Enable ();
     }
 

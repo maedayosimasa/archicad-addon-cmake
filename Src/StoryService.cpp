@@ -25,11 +25,14 @@ GS::Array<StoryData> StoryService::GetAllStories ()
 
         data.index = story.index;
 
-        // ★ AC28対応（nameが無いので仮生成）
-        data.name = GS::UniString::Printf("Floor %d", story.index);
+   // インデックスが0以上（地上）なら +1 して表示、負（地下）ならそのまま表示
+    Int32 displayFloorNum = (story.index >= 0) ? (story.index + 1) : story.index;
+    
+    data.name = GS::UniString::Printf("Floor %d", displayFloorNum);
+    // --- ここまで修正 ---
 
-        result.Push(data);
-    }
+    result.Push(data);
+}
 
     if (storyInfo.data != nullptr)
         BMKillHandle((GSHandle*)&storyInfo.data);
