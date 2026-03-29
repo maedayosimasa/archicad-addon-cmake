@@ -2,28 +2,20 @@
 #define EXAMPLE_DIALOG_HPP
 
 #include "ACAPinc.h"
-
 #include "DGDialog.hpp"
-#include "DGPanel.hpp"
-#include "DGItem.hpp"
 #include "DGButton.hpp"
 #include "DGCheckItem.hpp"
 #include "DGTreeView.hpp"
-
 #include "ResourceIds.hpp"
-
-struct Filter {
-    API_ElemTypeID id;
-    DG::CheckBox* cb;
-    const char* name;
-};
 
 class ExampleDialog : public DG::ModalDialog,
                       public DG::PanelObserver,
                       public DG::ButtonItemObserver
 {
 private:
-    DG::SingleSelTreeView resultTree;
+    // 【重要】ポインタ（*）ではなく、すべて実体として宣言します。
+    // これにより、Dialogが作られた瞬間にメモリが確保され、GRCと強固に結びつきます。
+    DG::MultiSelTreeView resultTree;
 
     DG::Button      searchButton;
     DG::CheckBox    wallCheck;
@@ -33,21 +25,23 @@ private:
     DG::CheckBox    winDoorCheck;
     DG::CheckBox    objectCheck;
 
-    // ★ポインタに変更（重要）
-    DG::CheckBox* storyChecks[4];
+    // newを避けるため、配列ではなく個別の変数として宣言します
+    DG::CheckBox    storyCheck1;
+    DG::CheckBox    storyCheck2;
+    DG::CheckBox    storyCheck3;
+    DG::CheckBox    storyCheck4;
 
 public:
     ExampleDialog ();
     virtual ~ExampleDialog ();
 
-    void PanelOpened (const DG::PanelOpenEvent& ev) override;
-    void ButtonClicked (const DG::ButtonClickEvent& ev) override;
+    virtual void PanelOpened (const DG::PanelOpenEvent& ev) override;
+    virtual void ButtonClicked (const DG::ButtonClickEvent& ev) override;
 
 private:
     void RefreshElementList ();
-    GS::Array<Filter> GetSelectedFilters ();
+    void SearchAndAdd (API_ElemTypeID typeID, const char* label, const GS::Array<short>& stories, Int32& totalCount);
     GS::Array<short> GetSelectedStories ();
-    void BuildTree (const char* name, const GS::Array<API_Guid>& guids);
 };
 
 #endif

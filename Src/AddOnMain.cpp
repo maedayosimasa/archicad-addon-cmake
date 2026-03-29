@@ -5,8 +5,9 @@
 
 static GSErrCode MenuCommandHandler (const API_MenuParams* menuParams)
 {
-    if (menuParams->menuItemRef.menuResID == ID_MENU_STRINGS) {
-        ExampleDialog dialog; // 名前を統一
+    // メニューIDの判定を ID_MENU_STRINGS (32500) と比較
+    if (menuParams->menuItemRef.menuResID == 32500) { 
+        ExampleDialog dialog;
         dialog.Invoke ();
     }
     return NoError;
@@ -14,17 +15,20 @@ static GSErrCode MenuCommandHandler (const API_MenuParams* menuParams)
 
 extern "C" {
     API_AddonType __stdcall CheckEnvironment (API_EnvirParams* envir) {
-        RSGetIndString (&envir->addOnInfo.name, 32500, 1, ACAPI_GetOwnResModule ());
-        RSGetIndString (&envir->addOnInfo.description, 32500, 2, ACAPI_GetOwnResModule ());
+        // 【修正】名前と説明は通常 STR# 32000 から取得します
+        RSGetIndString (&envir->addOnInfo.name, 32000, 1, ACAPI_GetOwnResModule ());
+        RSGetIndString (&envir->addOnInfo.description, 32000, 2, ACAPI_GetOwnResModule ());
         return APIAddon_Normal;
     }
 
     GSErrCode __stdcall RegisterInterface (void) {
-        return ACAPI_MenuItem_RegisterMenu (ID_MENU_STRINGS, 0, MenuCode_Tools, MenuFlag_Default);
+        // メニューをツールメニューに登録
+        return ACAPI_MenuItem_RegisterMenu (32500, 0, MenuCode_Tools, MenuFlag_Default);
     }
 
     GSErrCode __stdcall Initialize (void) {
-        return ACAPI_MenuItem_InstallMenuHandler (ID_MENU_STRINGS, MenuCommandHandler);
+        // ハンドラをインストール
+        return ACAPI_MenuItem_InstallMenuHandler (32500, MenuCommandHandler);
     }
 
     GSErrCode __stdcall FreeData (void) {

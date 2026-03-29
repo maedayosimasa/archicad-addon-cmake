@@ -1,22 +1,30 @@
 ﻿#include "ResourceIds.hpp"
 
-'STR#' ID_ADDON_INFO "Add-on Name and Description" {
-/* [  1] */		"サンプルアドオン"
-/* [  2] */		"サンプルアドオンの説明..."
+'STR#' 32000 "Add-on Name and Description" {
+    "maeda AddOn"
+    "maeda AddOn Description v-001"
 }
 
-'STR#' ID_ADDON_MENU "Strings for the Menu" {
-/* [  1] */		"サンプルアドオンコマンド... ^E3 ^ES ^EE ^EI ^ED ^ET ^10001"
+'STR#' 32500 "Menu Strings" {
+    "maeda Test"
+    "maeda Search Dialog..."
 }
 
-'GDLG' ID_ADDON_DLG Modal | grow   40   40  345  128  "" {
-/* [  1] */ Button				  245   95   90   23	LargePlain  "OK"
-	/* [  2] */ Button				  145   95   90   23	LargePlain  "キャンセル"
-/* [  3] */ Separator			   10   83  325    2
-}
+'GDLG' 32501 Modal | noGrow 40 40 600 500 "Element Property List" {
 
-'DLGH' ID_ADDON_DLG DLG_Example {
-1	""		Button_0
-2	""		Button_1
-3	""		Separator_0
+    MultiSelTreeView 1 10 245 580 225
+
+    Button 2 500 210 90 25 "Search"
+
+    CheckBox 3 10 80 230 20 "Walls"
+    CheckBox 4 10 100 230 20 "Columns"
+    CheckBox 5 10 120 230 20 "Beams"
+    CheckBox 6 10 140 230 20 "Slabs"
+    CheckBox 7 10 160 230 20 "Windows / Doors"
+    CheckBox 8 10 180 230 20 "Objects"
+
+    CheckBox 9 10 10 230 15 "Story1"
+    CheckBox 10 10 25 230 15 "Story2"
+    CheckBox 11 10 40 230 15 "Story3"
+    CheckBox 12 10 55 230 15 "Story4"
 }

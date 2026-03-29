@@ -1,79 +1,66 @@
-﻿#include "ACAPinc.h"
-
+﻿#include "ExamplePrecompiledHeader.hpp"
 #include "ExampleDialog.hpp"
-
-#include "UniString.hpp"
-#include "BM.hpp"
-#include <algorithm>
-
 #include "ElementService.hpp"
 #include "StoryService.hpp"
 
-
+// ======================================================
+// コンストラクタ：初期化リスト（:のあとの部分）でGRCと確実に紐付けます
+// ======================================================
 ExampleDialog::ExampleDialog () :
     DG::ModalDialog (ACAPI_GetOwnResModule (), ID_SEARCH_DIALOG, ACAPI_GetOwnResModule ()),
-
-    resultTree   (GetReference (), ResultTreeID),
+    resultTree   (GetReference (), ResultTreeID),  // ← 最重要：実体を紐付け
     searchButton (GetReference (), SearchButtonID),
-
     wallCheck    (GetReference (), WallCheckID),
     columnCheck  (GetReference (), ColumnCheckID),
     beamCheck    (GetReference (), BeamCheckID),
     slabCheck    (GetReference (), SlabCheckID),
     winDoorCheck (GetReference (), WinDoorCheckID),
-    objectCheck  (GetReference (), ObjectCheckID)
+    objectCheck  (GetReference (), ObjectCheckID),
+    storyCheck1  (GetReference (), Story1CheckID), // 階数チェックも初期化
+    storyCheck2  (GetReference (), Story2CheckID),
+    storyCheck3  (GetReference (), Story3CheckID),
+    storyCheck4  (GetReference (), Story4CheckID)
 {
-    // ★ newで生成（これが正解）
-    storyChecks[0] = new DG::CheckBox (GetReference (), Story1CheckID);
-    storyChecks[1] = new DG::CheckBox (GetReference (), Story2CheckID);
-    storyChecks[2] = new DG::CheckBox (GetReference (), Story3CheckID);
-    storyChecks[3] = new DG::CheckBox (GetReference (), Story4CheckID);
-
     Attach (*this);
     searchButton.Attach (*this);
-
-// 修正後：すべて Uncheck() に変更
-    wallCheck.Uncheck ();
-    columnCheck.Uncheck ();
-    beamCheck.Uncheck ();
-    slabCheck.Uncheck ();
-    winDoorCheck.Uncheck ();
-    objectCheck.Uncheck ();
+    
+    // 診断用：もし紐付けに失敗していればレポートを出す
+    if (!resultTree.IsValid ()) {
+        ACAPI_WriteReport ("Error: TreeView binding failed! Check GRC ID.", true);
+    }
 }
 
+// ======================================================
+// デストラクタ：newしていないので delete は一切不要です
+// ======================================================
 ExampleDialog::~ExampleDialog ()
 {
     searchButton.Detach (*this);
     Detach (*this);
-
-    // ★delete忘れるとメモリリーク
-    for (int i = 0; i < 4; i++) {
-        delete storyChecks[i];
-    }
 }
 
-
+// ======================================================
+// パネルが開いた時
+// ======================================================
 void ExampleDialog::PanelOpened (const DG::PanelOpenEvent&)
 {
     auto stories = StoryService::GetAllStories ();
-    Int32 count = std::min ((Int32)stories.GetSize (), 4);
+    // 処理しやすくするためにポインタの配列にまとめる（宣言のみ）
+    DG::CheckBox* storyChecks[] = { &storyCheck1, &storyCheck2, &storyCheck3, &storyCheck4 };
 
-    for (Int32 i = 0; i < count; i++) {
-        storyChecks[i]->SetText (stories[i].name);
-        
-        // 修正前：storyChecks[i]->Check ();
-        // 修正後：初期状態でオフにする
-        storyChecks[i]->Uncheck (); 
-        
-        storyChecks[i]->Enable ();
-    }
-
-    for (Int32 i = count; i < 4; i++) {
-        storyChecks[i]->Disable ();
+    for (int i = 0; i < 4; i++) {
+        if (i < (int)stories.GetSize ()) {
+            storyChecks[i]->SetText (stories[i].name);
+            storyChecks[i]->Enable ();
+        } else {
+            storyChecks[i]->Disable ();
+        }
     }
 }
 
-
+// ======================================================
+// ボタンクリック
+// ======================================================
 void ExampleDialog::ButtonClicked (const DG::ButtonClickEvent& ev)
 {
     if (ev.GetSource () == &searchButton) {
@@ -81,87 +68,77 @@ void ExampleDialog::ButtonClicked (const DG::ButtonClickEvent& ev)
     }
 }
 
-
+// ======================================================
+// リストの更新
+// ======================================================
 void ExampleDialog::RefreshElementList ()
 {
-    resultTree.DeleteItem (DG::TreeView::RootItem);
+    // 描画を一時停止（大量データ追加時の画面のチラつきと処理落ちを防ぐため）
+    resultTree.DisableDraw ();
 
-    auto filters = GetSelectedFilters ();
+    // ★ もし DeleteAllItems() でエラーになる場合はこちらを使用
+    resultTree.DeleteItem (DG::TreeView::AllItems); 
+
     auto stories = GetSelectedStories ();
+    Int32 totalFound = 0;
 
-    for (const auto& f : filters) {
+    if (wallCheck.IsChecked ())    SearchAndAdd (API_WallID,   "Walls",   stories, totalFound);
+    if (columnCheck.IsChecked ())  SearchAndAdd (API_ColumnID, "Columns", stories, totalFound);
+    if (beamCheck.IsChecked ())    SearchAndAdd (API_BeamID,   "Beams",   stories, totalFound);
+    if (slabCheck.IsChecked ())    SearchAndAdd (API_SlabID,   "Slabs",   stories, totalFound);
+    if (winDoorCheck.IsChecked ()) SearchAndAdd (API_WindowID, "Windows", stories, totalFound);
+    if (objectCheck.IsChecked ())  SearchAndAdd (API_ObjectID, "Objects", stories, totalFound);
 
-        auto guids = ElementService::GetElementsByTypeAndStories (
-            f.id,
-            stories
-        );
+    // 描画を再開して強制アップデート
+    resultTree.EnableDraw ();
+    resultTree.RedrawItem (DG::TreeView::RootItem);
 
-        if (!guids.IsEmpty ()) {
-            BuildTree (f.name, guids);
-        }
-    }
+    // GS::UniString reportMsg = GS::UniString::Printf ("Found: %d elements", (int)totalFound);
+    // ACAPI_WriteReport (reportMsg, true);
 }
 
-
-GS::Array<Filter> ExampleDialog::GetSelectedFilters ()
+// ======================================================
+// 要素検索とツリー追加
+// ======================================================
+void ExampleDialog::SearchAndAdd (API_ElemTypeID typeID, const char* label, const GS::Array<short>& stories, Int32& totalCount)
 {
-    GS::Array<Filter> result;
+    auto guids = ElementService::GetElementsByTypeAndStories (typeID, stories);
+    
+    if (!guids.IsEmpty ()) {
+        // [修正] アロー演算子(->) ではなく ドット(.) を使用
+        Int32 root = resultTree.AppendItem (DG::TreeView::RootItem);
+        
+        if (root != DG::TreeView::NoItem) {
+            resultTree.SetItemText (root, GS::UniString::Printf ("%s (%d)", label, (int)guids.GetSize ()));
 
-    Filter all[] = {
-        { API_WallID, &wallCheck, "Walls" },
-        { API_ColumnID, &columnCheck, "Columns" },
-        { API_BeamID, &beamCheck, "Beams" },
-        { API_SlabID, &slabCheck, "Slabs" },
-        { API_WindowID, &winDoorCheck, "Windows" },
-        { API_DoorID, &winDoorCheck, "Doors" },
-        { API_ObjectID, &objectCheck, "Objects" }
-    };
-
-    for (auto& f : all) {
-        if (f.cb->IsChecked ()) {
-            result.Push (f);
+            for (const auto& g : guids) {
+                Int32 child = resultTree.InsertItem (root, DG::TreeView::BottomItem);
+                if (child != DG::TreeView::NoItem) {
+                    resultTree.SetItemText (child, APIGuid2GSGuid(g).ToUniString());
+                }
+            }
+            resultTree.ExpandItem (root);
         }
+        totalCount += (Int32)guids.GetSize ();
     }
-
-    return result;
 }
 
-
+// ======================================================
+// 選択階数の取得
+// ======================================================
 GS::Array<short> ExampleDialog::GetSelectedStories ()
 {
     GS::Array<short> result;
-
     auto stories = StoryService::GetAllStories ();
-    Int32 count = std::min ((Int32)stories.GetSize (), 4);
+    DG::CheckBox* storyChecks[] = { &storyCheck1, &storyCheck2, &storyCheck3, &storyCheck4 };
 
-    for (Int32 i = 0; i < count; i++) {
-        if (storyChecks[i]->IsChecked ()) {
+    for (int i = 0; i < 4; i++) {
+        if (i < (int)stories.GetSize () && storyChecks[i]->IsChecked ()) {
             result.Push (stories[i].index);
         }
     }
-
-    return result;
-}
-
-
-void ExampleDialog::BuildTree (const char* name, const GS::Array<API_Guid>& guids)
-{
-    Int32 root = resultTree.InsertItem (DG::TreeView::RootItem, DG::TreeView::BottomItem);
-
-    resultTree.SetItemText (
-        root,
-        GS::UniString::Printf ("%s (%d)", name, (int)guids.GetSize ())
-    );
-
-    for (const auto& g : guids) {
-
-        Int32 child = resultTree.InsertItem (root, DG::TreeView::BottomItem);
-
-        resultTree.SetItemText (
-            child,
-            APIGuid2GSGuid (g).ToUniString ().GetSubstring (0, 8)
-        );
+    if (result.IsEmpty ()) {
+        for (const auto& s : stories) result.Push (s.index);
     }
-
-    resultTree.ExpandItem (root);
+    return result;
 }

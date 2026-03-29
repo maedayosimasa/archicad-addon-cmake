@@ -5,7 +5,7 @@
 /* ========================================================================= */
 'STR#' 32000 "Add-on Name and Description" {
 /* [  1] */		"maeda AddOn"
-/* [  2] */		"maeda AddOn Description v-001"
+/* [  2] */		"maeda AddOn Description v-002"
 }
 
 /* ========================================================================= */
@@ -16,34 +16,22 @@
 /* [  2] */		"maeda Search Dialog..."
 }
 
-/* ダイアログ本体 */
-'GDLG'  32501  Modal | noGrow     40   40  270  480  "Element Search" {
 
-    /* [  1] */ SingleSelTreeView  10  245  230  225  LargePlain 16 16 16 16 noLabelEdit noDragDrop 80 noRootButton
+'GDLG' 32501 Modal | noGrow 40 40 600 500 "Element Property List" {
 
-    /* [  2] */ Button           150  210   90   25  LargePlain  "Search"
+    MultiSelTreeView    10  245  580  225  LargePlain  16  16  16  16  noLabelEdit  noDragDrop  0
 
-    /* [  3] */ CheckBox          10   80  230   20  LargePlain  "Walls"
-    /* [  4] */ CheckBox          10  100  230   20  LargePlain  "Columns"
-    /* [  5] */ CheckBox          10  120  230   20  LargePlain  "Beams"
-    /* [  6] */ CheckBox          10  140  230   20  LargePlain  "Slabs"
-    /* [  7] */ CheckBox          10  160  230   20  LargePlain  "Windows / Doors"
-    /* [  8] */ CheckBox          10  180  230   20  LargePlain  "Objects"
+    Button  500 210 90 25 LargePlain "Search"
 
-    /* [  9] */ CheckBox          10   10  230   15  LargePlain  "Story1"
-    /* [ 10] */ CheckBox          10   25  230   15  LargePlain  "Story2"
-    /* [ 11] */ CheckBox          10   40  230   15  LargePlain  "Story3"
-    /* [ 12] */ CheckBox          10   55  230   15  LargePlain  "Story4"
-}
+    CheckBox  10 80 230 20 LargePlain "Walls"
+    CheckBox  10 100 230 20 LargePlain "Columns"
+    CheckBox  10 120 230 20 LargePlain "Beams"
+    CheckBox  10 140 230 20 LargePlain "Slabs"
+    CheckBox  10 160 230 20 LargePlain "Windows / Doors"
+    CheckBox  10 180 230 20 LargePlain "Objects"
 
-/* ヘルプ定義 (AC28では大文字 'DLGH' と Anchor が必須) */
-'DLGH'  32501  DLG_32501_Example {
-1    "Result List"      Tree_Anchor
-2    "Search Button"    Btn_Anchor
-3    "Wall Check"       Wall_Anchor
-4    "Column Check"     Col_Anchor
-5    "Beam Check"       Beam_Anchor
-6    "Slab Check"       Slab_Anchor
-7    "WinDoor Check"    WD_Anchor
-8    "Object Check"     Obj_Anchor
+    CheckBox  10 10 230 15 LargePlain "Story1"
+    CheckBox  10 25 230 15 LargePlain "Story2"
+    CheckBox  10 40 230 15 LargePlain "Story3"
+    CheckBox  10 55 230 15 LargePlain "Story4"
 }
