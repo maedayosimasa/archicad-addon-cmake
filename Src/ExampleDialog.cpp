@@ -5,9 +5,10 @@
 
 // プロジェクト固有ヘッダー
 #include "ExampleDialog.hpp"
-#include "ElementService.hpp"
+#include "ElementSearchService.hpp" // 検索サービス（ElementInfoを返すもの）
 #include "StoryService.hpp"
 #include "ResourceIds.hpp"
+#include "StringConversion.hpp" // APIGuidToString 用
 
 // ======================================================
 // コンストラクタ / デストラクタ
@@ -29,6 +30,7 @@ ExampleDialog::ExampleDialog () :
 {
     Attach (*this);
     searchButton.Attach (*this);
+    // Observerの接続
     resultList.Attach (*static_cast<DG::ListBoxObserver*> (this)); 
 }
 
@@ -40,7 +42,7 @@ ExampleDialog::~ExampleDialog ()
 }
 
 // ======================================================
-// パネル初期設定
+// パネル初期設定 (PanelOpened)
 // ======================================================
 void ExampleDialog::PanelOpened (const DG::PanelOpenEvent&)
 {
@@ -49,18 +51,29 @@ void ExampleDialog::PanelOpened (const DG::PanelOpenEvent&)
     // カラムの設定（4列）
     resultList.SetTabFieldCount (4);
     
-    // 各列の幅と属性を定義（のヘッダー反映用）
+    // 各列の幅と属性を定義
     resultList.SetTabFieldProperties (1, 0,   180, DG::ListBox::Left, DG::ListBox::EndTruncate, true);
     resultList.SetTabFieldProperties (2, 185, 350, DG::ListBox::Left, DG::ListBox::EndTruncate, true);
     resultList.SetTabFieldProperties (3, 355, 450, DG::ListBox::Left, DG::ListBox::EndTruncate, true);
     resultList.SetTabFieldProperties (4, 455, 580, DG::ListBox::Left, DG::ListBox::EndTruncate, true);
 
+    // --- 修正箇所：エラーの出た SetHeaderType を削除し、テキストセットのみにする ---
     resultList.SetHeaderItemText (1, "GUID");
     resultList.SetHeaderItemText (2, "Element Type");
     resultList.SetHeaderItemText (3, "Story No.");
     resultList.SetHeaderItemText (4, "Status");
 
     resultList.EnableDraw ();
+}
+// ======================================================
+// ボタンクリックイベント (司令塔)
+// ======================================================
+void ExampleDialog::ButtonClicked (const DG::ButtonClickEvent& ev)
+{
+    if (ev.GetSource () == &searchButton) {
+        // リストの表示更新
+        RefreshElementList ();
+    }
 }
 
 // ======================================================
@@ -74,11 +87,12 @@ void ExampleDialog::RefreshElementList ()
     resultList.DeleteItem (DG::ListBox::AllItems); 
     itemGuids.Clear (); 
 
-    // 2. 選択されている階数を取得
+    // 2. 選択されている階数を取得 (StoryService経由)
     auto stories = GetSelectedStories ();
     Int32 totalFound = 0;
 
-    // 3. 各ツールごとに検索して追加（SearchAndAddの中でInsertItemが行われる）
+    // 3. 各ツールごとに検索して追加
+    // SearchAndAddがサービス(ElementSearchService)を呼び出す
     if (wallCheck.IsChecked ())    SearchAndAdd (API_WallID,   "Wall",    stories, totalFound);
     if (columnCheck.IsChecked ())  SearchAndAdd (API_ColumnID, "Column",  stories, totalFound);
     if (beamCheck.IsChecked ())    SearchAndAdd (API_BeamID,   "Beam",    stories, totalFound);
@@ -88,106 +102,59 @@ void ExampleDialog::RefreshElementList ()
     resultList.EnableDraw ();
     resultList.Redraw ();
 
-    // 5. 結果をレポートパレットに表示（正しく動いているか確認するため）
-    ACAPI_WriteReport (GS::UniString::Printf ("Build List: %d items added.", totalFound), false);
+    // 5. 結果を通知
+    ACAPI_WriteReport (GS::UniString::Printf ("Search Complete: %d items added.", totalFound), false);
 }
-/// ======================================================
-// 要素検索とリスト追加 (修正版)
+
+// ======================================================
+// 要素検索とリスト追加 (サービス連携版)
 // ======================================================
 void ExampleDialog::SearchAndAdd (API_ElemTypeID typeID, const char* label, const GS::Array<short>& stories, Int32& totalCount)
 {
-    GS::Array<API_Guid> guids;
-    if (ACAPI_Element_GetElemList (typeID, &guids) != NoError) return;
+    // 1. サービス(ElementSearchService)に検索を依頼
+    // サービス側で階数判定(stories比較)まで完了したデータが返ってくる
+    GS::Array<ElementInfo> foundElements = ElementSearchService::SearchElements (typeID, GS::UniString (label), stories);
 
-    for (const auto& g : guids) {
-        API_Element element = {};
-        element.header.guid = g;
-        if (ACAPI_Element_GetHeader (&element.header) != NoError) continue;
+    // 2. 受け取った結果をリストボックスに書き込む（UI操作に特化）
+    for (const auto& info : foundElements) {
+        resultList.InsertItem (DG::ListBox::BottomItem);
+        short currentRow = (short) resultList.GetItemCount ();
 
-        // 階数フィルタ
-        bool storyMatch = stories.IsEmpty();
-        if (!storyMatch) {
-            for (short sIdx : stories) {
-                if (element.header.floorInd == sIdx) { storyMatch = true; break; }
-            }
-        }
-        if (!storyMatch) continue;
+        resultList.SetTabItemText (currentRow, 1, APIGuidToString (info.guid));
+        resultList.SetTabItemText (currentRow, 2, info.typeName);
+        
+        // 階数表示ロジック（地上階は+1、地下階はそのまま）
+        Int32 displayFloor = (info.floorInd >= 0) ? (info.floorInd + 1) : info.floorInd;
+        resultList.SetTabItemText (currentRow, 3, GS::UniString::Printf ("Floor %d", displayFloor));
+        
+        resultList.SetTabItemText (currentRow, 4, info.status);
 
-        // --- 修正の要：物理的に行を増やし、その行番号を特定する ---
-        resultList.InsertItem (DG::ListBox::BottomItem); // 末尾に行を挿入
-        short currentRow = (short) resultList.GetItemCount (); // 追加された最新の行番号を取得
-
-        // currentRow（1, 2, 3...）に対して値をセットすることで「書き足し」を実現
-        resultList.SetTabItemText (currentRow, 1, APIGuidToString(g));
-        resultList.SetTabItemText (currentRow, 2, GS::UniString(label));
-        resultList.SetTabItemText (currentRow, 3, GS::UniString::Printf("%d", element.header.floorInd + 1));
-        resultList.SetTabItemText (currentRow, 4, "Verified");
-
-        itemGuids.Push (g);
+        // 管理用GUID配列に保存（後で要素を選択する際に使用）
+        itemGuids.Push (info.guid);
         totalCount++;
     }
 }
+
 // ======================================================
-// 補助関数：階数取得 (二重定義を解消)
+// 補助関数：UIから選択された階数インデックスを取得
 // ======================================================
 GS::Array<short> ExampleDialog::GetSelectedStories ()
 {
     GS::Array<short> result;
-    auto stories = StoryService::GetAllStories ();
+    // 全階層の情報を取得
+    auto allStories = StoryService::GetAllStories ();
     DG::CheckBox* storyChecks[] = { &storyCheck1, &storyCheck2, &storyCheck3, &storyCheck4 };
 
     for (int i = 0; i < 4; i++) {
-        if (i < (int)stories.GetSize () && storyChecks[i]->IsChecked ()) {
-            result.Push (stories[i].index);
+        // UIのチェックが入っている階の「index」を収集
+        if (i < (int)allStories.GetSize () && storyChecks[i]->IsChecked ()) {
+            result.Push (allStories[i].index);
         }
     }
-    // 何もチェックされていない場合は全階を対象とする
+
+    // もし1つもチェックされていない場合は、便宜上「全階層」を対象とする
     if (result.IsEmpty ()) {
-        for (const auto& s : stories) result.Push (s.index);
+        for (const auto& s : allStories) result.Push (s.index);
     }
     return result;
-}
-
-// ======================================================
-// 補助関数：選択要素取得 (二重定義を解消)
-// ======================================================
-GS::Array<API_Guid> ExampleDialog::GetSelectedElements ()
-{
-    GS::Array<API_Guid> selectedGuids;
-    API_SelectionInfo selectionInfo;
-    GS::Array<API_Neig> selNeigs;
-
-    if (ACAPI_Selection_Get (&selectionInfo, &selNeigs, false) == NoError) {
-        for (const auto& neig : selNeigs) {
-            selectedGuids.Push (neig.guid);
-        }
-    }
-    return selectedGuids;
-}
-
-// --- この関数が丸ごと抜けている、または名前が間違っている可能性があります ---
-void ExampleDialog::ButtonClicked (const DG::ButtonClickEvent& ev)
-{
-    if (ev.GetSource () == &searchButton) {
-        resultList.DisableDraw ();
-        
-        // 1. 全データを消去してリセット
-        resultList.DeleteItem (DG::ListBox::AllItems); 
-        itemGuids.Clear ();
-        
-        auto stories = GetSelectedStories ();
-        Int32 total = 0;
-
-        // 2. 各ツールを検索（SearchAndAddの中でDeleteItemを呼んではいけない）
-        if (wallCheck.IsChecked ())    SearchAndAdd (API_WallID,   "Wall",   stories, total);
-        if (columnCheck.IsChecked ())  SearchAndAdd (API_ColumnID, "Column", stories, total);
-        if (beamCheck.IsChecked ())    SearchAndAdd (API_BeamID,   "Beam",   stories, total);
-        if (slabCheck.IsChecked ())    SearchAndAdd (API_SlabID,   "Slab",   stories, total);
-
-        resultList.EnableDraw ();
-        resultList.Redraw (); // 強制再描画
-        
-        // デバッグレポート出力
-        ACAPI_WriteReport (GS::UniString::Printf ("Search Complete: %d items added.", total), false);
-    }
 }
