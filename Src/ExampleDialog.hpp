@@ -6,16 +6,17 @@
 #include "DGButton.hpp"
 #include "DGCheckItem.hpp"
 #include "DGTreeView.hpp"
-#include "ResourceIds.hpp"
 
 class ExampleDialog : public DG::ModalDialog,
                       public DG::PanelObserver,
-                      public DG::ButtonItemObserver
+                      public DG::ButtonItemObserver,
+                      public DG::ListBoxObserver,    // ← 【重要】必ず public で継承する
+                      public DG::CheckItemObserver
 {
 private:
     // 【重要】ポインタ（*）ではなく、すべて実体として宣言します。
     // これにより、Dialogが作られた瞬間にメモリが確保され、GRCと強固に結びつきます。
-    DG::MultiSelTreeView resultTree;
+    DG::MultiSelListBox    resultList;
 
     DG::Button      searchButton;
     DG::CheckBox    wallCheck;
@@ -42,6 +43,8 @@ private:
     void RefreshElementList ();
     void SearchAndAdd (API_ElemTypeID typeID, const char* label, const GS::Array<short>& stories, Int32& totalCount);
     GS::Array<short> GetSelectedStories ();
+    GS::Array<API_Guid> GetSelectedElements ();
+    GS::Array<API_Guid> itemGuids; // 検索結果のGUIDを一時保存する配列
 };
 
 #endif

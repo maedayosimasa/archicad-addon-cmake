@@ -36,7 +36,7 @@
 #include "DGModule.hpp"
 #include "DGDialog.hpp"
 #include "DGListBox.hpp"
-#include "DGTreeView.hpp"
+#include "DGListBox.hpp"
 #include "DGCheckItem.hpp"
 #include "DGButton.hpp"
 
