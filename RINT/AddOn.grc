@@ -19,7 +19,7 @@
 
 'GDLG' 32501 Modal | noGrow 40 40 600 500 "Element Property List" {
     /* MultiSelList  x   y   dx   dy   fontSpec   partItems      scrollType  itemSize  headerFlag  headerSize */
-    MultiSelList    10  245  580  225  LargePlain  PartialItems   VScroll     24        HasHeader   22
+    /* MultiSelList    10  245  580  225  LargePlain  PartialItems   VScroll     24        HasHeader   22 */
 
     Button  500 210 90 25 LargePlain "Search"
 
@@ -34,4 +34,11 @@
     CheckBox  10 25 230 15 LargePlain "Story2"
     CheckBox  10 40 230 15 LargePlain "Story3"
     CheckBox  10 55 230 15 LargePlain "Story4"
+}
+
+'GDLG' 32502 Modal | grow   0   0  600  400  "Search Results List" {
+    /* (1) 結果リスト */
+    MultiSelList   10   10  580  340  LargePlain   PartialItems   VScroll     24        HasHeader   22
+    /* (2) 閉じるボタン */
+    Button        500  360   90   30  LargePlain "return"
 }
