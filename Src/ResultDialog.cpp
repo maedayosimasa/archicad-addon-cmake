@@ -2,7 +2,6 @@
 #include "APIEnvir.h"         // 1. 環境設定
 #include "ACAPinc.h"          // 2. API基本
 #include "ResultDialog.hpp"   // 3. 自身のヘッダー
-#include "StringConversion.hpp"
 
 ResultDialog::ResultDialog (const GS::Array<ElementInfo>& data) :
     // GRCの新しいリソースID（例: 32502）を指定
@@ -29,15 +28,18 @@ void ResultDialog::PanelOpened (const DG::PanelOpenEvent&)
     
     // カラム設定（テーブル表示用）
     resultList.SetTabFieldCount (4);
-    resultList.SetTabFieldProperties (1, 0,   180, DG::ListBox::Left, DG::ListBox::EndTruncate, true);
-    resultList.SetTabFieldProperties (2, 185, 350, DG::ListBox::Left, DG::ListBox::EndTruncate, true);
+    resultList.SetTabFieldProperties (1, 0,   220, DG::ListBox::Left, DG::ListBox::EndTruncate, true);
+    resultList.SetTabFieldProperties (2, 225, 350, DG::ListBox::Left, DG::ListBox::EndTruncate, true);
     resultList.SetTabFieldProperties (3, 355, 450, DG::ListBox::Left, DG::ListBox::EndTruncate, true);
-    resultList.SetTabFieldProperties (4, 455, 580, DG::ListBox::Left, DG::ListBox::EndTruncate, true);
+    resultList.SetTabFieldProperties (4, 455, 780, DG::ListBox::Left, DG::ListBox::EndTruncate, true);
 
     resultList.SetHeaderItemText (1, "GUID");
     resultList.SetHeaderItemText (2, "Type");
     resultList.SetHeaderItemText (3, "Story");
-    resultList.SetHeaderItemText (4, "Status");
+    resultList.SetHeaderItemText (4, "Element ID / Category");
+
+    // 件数をタイトルに表示
+    this->SetTitle (GS::UniString::Printf ("Search Results List - %u items found", displayData.GetSize ()));
 
     // データの流し込み
     for (const auto& info : displayData) {

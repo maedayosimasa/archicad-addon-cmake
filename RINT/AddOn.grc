@@ -36,9 +36,9 @@
     CheckBox  10 55 230 15 LargePlain "Story4"
 }
 
-'GDLG' 32502 Modal | grow   0   0  600  400  "Search Results List" {
+'GDLG' 32502 Modal | grow   0   0  800  400  "Search Results List" {
     /* (1) 結果リスト */
-    MultiSelList   10   10  580  340  LargePlain   PartialItems   VScroll     24        HasHeader   22
+    MultiSelList   10   10  780  340  LargePlain   PartialItems   HVScroll     24        HasHeader   22
     /* (2) 閉じるボタン */
-    Button        500  360   90   30  LargePlain "return"
+    Button        700  360   90   30  LargePlain "return"
 }

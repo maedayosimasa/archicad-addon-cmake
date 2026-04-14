@@ -9,7 +9,6 @@
 #include "ElementSearchService.hpp" // 検索サービス
 #include "StoryService.hpp"
 #include "ResourceIds.hpp"
-#include "StringConversion.hpp"
 
 // ======================================================
 // コンストラクタ

@@ -3,7 +3,6 @@
 
 #include "APIEnvir.h"
 #include "ACAPinc.h"
-#include "StringConversion.hpp"
 
 struct ElementInfo {
     API_Guid        guid;

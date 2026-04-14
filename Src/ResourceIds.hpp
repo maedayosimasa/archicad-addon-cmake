@@ -3,6 +3,7 @@
 
 #define ID_MENU_STRINGS     32500
 #define ID_SEARCH_DIALOG    32501
+#define ID_RESULT_DIALOG    32502
 
 /* GDLG内のインデックス [1] ～ [12] */
 #define SearchButtonID  1  // GRCで一番上に書いた Button

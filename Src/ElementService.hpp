@@ -2,13 +2,7 @@
 #define ELEMENT_SERVICE_HPP
 
 #include "ACAPinc.h"
-
-// 検索結果をまとめる箱
-struct ElementInfo {
-    API_Guid guid;
-    short    floorInd;
-    // 将来、レイヤー名や面積が必要になったらここに足す
-};
+#include "ElementInfo.hpp"
 
 class ElementService {
 public:
