@@ -12,16 +12,16 @@
 /* 2. メニュー                                                               */
 /* ========================================================================= */
 'STR#' 32500 "Menu Strings" {
-/* [  1] */		"maeda Test"
+/* [  1] */		"maeda_AddOn"
 /* [  2] */		"maeda Search Dialog..."
 }
 
 
-'GDLG' 32501 Modal | noGrow 40 40 600 500 "Element Property List" {
+'GDLG' 32501 Modal | noGrow 40 40 450 250 "Element Property List" {
     /* MultiSelList  x   y   dx   dy   fontSpec   partItems      scrollType  itemSize  headerFlag  headerSize */
     /* MultiSelList    10  245  580  225  LargePlain  PartialItems   VScroll     24        HasHeader   22 */
 
-    Button  500 210 90 25 LargePlain "Search"
+    Button  330 200 90 25 LargePlain "Search"
 
     CheckBox  10 80 230 20 LargePlain "Walls"
     CheckBox  10 100 230 20 LargePlain "Columns"

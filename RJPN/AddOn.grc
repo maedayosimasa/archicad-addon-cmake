@@ -1,4 +1,4 @@
-#include "ResourceIds.hpp"
+﻿#include "ResourceIds.hpp"
 
 /* ========================================================================= */
 /* 1. アドオン情報                                                           */
@@ -12,14 +12,15 @@
 /* 2. メニュー                                                               */
 /* ========================================================================= */
 'STR#' 32500 "Menu Strings" {
-/* [  1] */		"maeda Test"
+/* [  1] */		"maeda_AddOn"
 /* [  2] */		"maeda Search Dialog..."
 }
 
 
-'GDLG' 32501 Modal | noGrow 40 40 600 500 "要素プロパティリスト" {
+
+'GDLG' 32501 Modal | noGrow 40 40 450  250  "要素プロパティリスト" {
     /* 検索ボタン */
-    Button  500 210 90 25 LargePlain "検索"
+    Button  330 200 90 25  LargePlain "検索"
 
     /* ツール別チェックボックス */
     CheckBox  10 80 230 20 LargePlain "壁"
@@ -30,10 +31,10 @@
     CheckBox  10 180 230 20 LargePlain "オブジェクト"
 
     /* 階数別チェックボックス */
-    CheckBox  10 10 230 15 LargePlain "1階"
-    CheckBox  10 25 230 15 LargePlain "2階"
-    CheckBox  10 40 230 15 LargePlain "3階"
-    CheckBox  10 55 230 15 LargePlain "4階"
+    CheckBox  10 10 230 15 LargePlain "地下１階"
+    CheckBox  10 25 230 15 LargePlain "1階"
+    CheckBox  10 40 230 15 LargePlain "2階"
+    CheckBox  10 55 230 15 LargePlain "3階"
 }
 
 'GDLG' 32502 Modal | grow   0   0  800  400  "検索結果リスト" {
