@@ -1,32 +1,35 @@
-﻿#include "ExamplePrecompiledHeader.hpp" // もしあれば
-#include "APIEnvir.h"         // 1. 環境設定
-#include "ACAPinc.h"          // 2. API基本
-#include "ResultDialog.hpp"   // 3. 自身のヘッダー
+#include "ExamplePrecompiledHeader.hpp"
+#include "APIEnvir.h"
+#include "ACAPinc.h"
+#include "ResultDialog.hpp"
 
 ResultDialog::ResultDialog (const GS::Array<ElementInfo>& data) :
-    // GRCの新しいリソースID（例: 32502）を指定
-    DG::ModalDialog (ACAPI_GetOwnResModule (), 32502, ACAPI_GetOwnResModule ()),
+    DG::ModalDialog (ACAPI_GetOwnResModule (), ID_RESULT_DIALOG, ACAPI_GetOwnResModule ()),
     resultList  (GetReference (), ResultListID),
     closeButton (GetReference (), CloseButtonID),
     displayData (data)
 {
     Attach (*this);
     resultList.Attach (*this);
-    closeButton.Attach (*this); // ★ここ：ボタンのイベントを監視
+    closeButton.Attach (*this);
 }
 
 ResultDialog::~ResultDialog ()
 {
     Detach (*this);
     resultList.Detach (*this);
-    closeButton.Detach (*this); // ★ここ：後始末も忘れずに
+    closeButton.Detach (*this);
 }
 
 void ResultDialog::PanelOpened (const DG::PanelOpenEvent&)
 {
     resultList.DisableDraw ();
     
-    // カラム設定（テーブル表示用）
+    GSResModule resModule = ACAPI_GetOwnResModule ();
+    this->SetTitle (RSGetIndString (32502, 3, resModule));
+    closeButton.SetText (RSGetIndString (32502, 2, resModule));
+
+    // カラム設定
     resultList.SetTabFieldCount (4);
     resultList.SetTabFieldProperties (1, 0,   220, DG::ListBox::Left, DG::ListBox::EndTruncate, true);
     resultList.SetTabFieldProperties (2, 225, 350, DG::ListBox::Left, DG::ListBox::EndTruncate, true);
@@ -38,15 +41,11 @@ void ResultDialog::PanelOpened (const DG::PanelOpenEvent&)
     resultList.SetHeaderItemText (3, "フロア");
     resultList.SetHeaderItemText (4, "要素ID / カテゴリ");
 
-    // ウィンドウタイトルをセット
-    this->SetTitle (GS::UniString::Printf ("検索結果リスト - %u 個の要素が見つかりました", displayData.GetSize ()));
-
-    // データの流し込み
     for (const auto& info : displayData) {
         resultList.InsertItem (DG::ListBox::BottomItem);
         short row = (short)resultList.GetItemCount ();
         
-        resultList.SetTabItemText (row, 1, APIGuidToString(info.guid));
+        resultList.SetTabItemText (row, 1, APIGuid2GSGuid (info.guid).ToUniString ());
         resultList.SetTabItemText (row, 2, info.typeName);
         
         Int32 displayFloor = (info.floorInd >= 0) ? (info.floorInd + 1) : info.floorInd;
@@ -57,14 +56,9 @@ void ResultDialog::PanelOpened (const DG::PanelOpenEvent&)
     resultList.EnableDraw ();
 }
 
-// ★追加：ボタンがクリックされた時の処理
-// ResultDialog.cpp
-
 void ResultDialog::ButtonClicked (const DG::ButtonClickEvent& ev)
 {
     if (ev.GetSource () == &closeButton) {
-        // Archicad 28 ModalDialog を閉じるための正しいメソッド
-        // Accept (OK相当) または Cancel を引数に取ります
         this->PostCloseRequest (DG::ModalDialog::Accept); 
     }
 }

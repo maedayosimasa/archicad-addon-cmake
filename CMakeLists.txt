@@ -24,6 +24,4 @@ set (AddOnResourcesFolder .)
 
 set (PCH_HEADER "Src/ExamplePrecompiledHeader.hpp")
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 GenerateAddOnProject (CMakeTarget ${AC_VERSION} "${AC_API_DEVKIT_DIR}" ${AddOnSourcesFolder} ${AddOnResourcesFolder} ${AC_ADDON_LANGUAGE} ${addOnDefaultLanguage} ${PCH_HEADER})

@@ -95,20 +95,21 @@ See the list below for the matching Visual Studio and platform toolset versions 
 
 | Archicad | Visual Studio | Platform toolset |
 |---|---|---|
-| Archicad 29 | Visual Studio 2019 | v143 |
-| Archicad 28 | Visual Studio 2019 | v142 |
+| Archicad 29 | Visual Studio 2022 | v143 |
+| Archicad 28 | Visual Studio 2022 | v143 |
 | Archicad 27 | Visual Studio 2019 | v142 |
 | Archicad 26 | Visual Studio 2019 | v142 |
 | Archicad 25 | Visual Studio 2019 | v142 |
 | Archicad 24 | Visual Studio 2017 | v141 |
-| Archicad 23 | Visual Studio 2017 | v141 |
+| Archicad 28 | Visual Studio 2022 | v143 または v142 |
 
 Please note that you can always use the latest Visual Studio, but make sure you provide the correct platform toolset.
 
 Example for using Visual Studio 2022 with platform toolset 142:
 ```
-cmake -B Build -G "Visual Studio 17 2022" -A x64 -T v142 -DAC_API_DEVKIT_DIR=<DevKitSupportDir> -DAC_VERSION=28
+cmake -B Build -G "Visual Studio 17 2022" -A x64 -T v143 -DAC_API_DEVKIT_DIR=<DevKitSupportDir> -DAC_VERSION=28
 ```
+
 
 #### XCode (MacOS)
 

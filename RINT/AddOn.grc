@@ -1,50 +1,34 @@
-/* ========================================================================= */
-/* Add-on Info                                                               */
-/* ========================================================================= */
+/* RINT/AddOn.grc */
+
 'STR#' 32000 "Add-on Name and Description" {
-    /* [1] */ "maeda AddOn"
-    /* [2] */ "maeda AddOn Description v-002"
+/* [  1] */ "maeda AddOn "
+/* [  2] */ "maeda AddOn Description v-002 "
 }
 
-/* ========================================================================= */
-/* Menu                                                                      */
-/* ========================================================================= */
 'STR#' 32500 "Menu Strings" {
-    /* [1] */ "maeda_AddOn"
-    /* [2] */ "maeda Search Dialog..."
+/* [  1] */ "maeda AddOn "
+/* [  2] */ "maeda Search Dialog... "
 }
 
-/* ========================================================================= */
-/* Search Dialog Strings 'STR#'                                              */
-/* ========================================================================= */
+/* Search Dialog (32501) Strings */
 'STR#' 32501 "Search Dialog Strings" {
-    /* [1] */ "Search"
-    /* [2] */ "Walls"
-    /* [3] */ "Columns"
-    /* [4] */ "Beams"
-    /* [5] */ "Slabs"
-    /* [6] */ "Windows / Doors"
-    /* [7] */ "Objects"
-    /* [8] */ "Story 1"
-    /* [9] */ "Story 2"
-    /* [10] */ "Story 3"
-    /* [11] */ "Story 4"
+/* [  1] */ "Start Search "
+/* [  2] */ "Walls "
+/* [  3] */ "Columns "
+/* [  4] */ "Beams "
+/* [  5] */ "Slabs "
+/* [  6] */ "Windows / Doors "
+/* [  7] */ "Objects "
+/* [  8] */ "Story B1 "
+/* [  9] */ "Story 1 "
+/* [ 10] */ "Story 2 "
+/* [ 11] */ "Story 3 "
+/* [ 12] */ "Search Settings "
 }
 
-/* ========================================================================= */
-/* Result Dialog Strings 'STR#'                                              */
-/* ========================================================================= */
+/* Result Dialog (32502) Strings */
 'STR#' 32502 "Result Dialog Strings" {
-    /* [1] */ "Search Results"
-    /* [2] */ "Return"
-}
-
-/* ========================================================================= */
-/* Result List Header Strings                                                */
-/* ========================================================================= */
-'STR#' 32503 "Result Header Strings" {
-    /* [1] */ "GUID"
-    /* [2] */ "Type"
-    /* [3] */ "Story"
-    /* [4] */ "Element ID / Category"
+/* [  1] */ "Search Result List "
+/* [  2] */ "Close "
+/* [  3] */ "Search Results "
 }

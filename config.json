@@ -8,6 +8,7 @@
     },
     "defaultLanguage": "JPN",
     "languages": [
+        "INT",
         "JPN"
     ]
 }
