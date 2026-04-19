@@ -1,4 +1,4 @@
-﻿#include "APIEnvir.h"
+#include "APIEnvir.h"
 #include "ACAPinc.h"
 #include "ResourceIds.hpp"
 #include "ExampleDialog.hpp"

@@ -28,7 +28,7 @@ GS::Array<StoryData> StoryService::GetAllStories ()
    // インデックスが0以上（地上）なら +1 して表示、負（地下）ならそのまま表示
     Int32 displayFloorNum = (story.index >= 0) ? (story.index + 1) : story.index;
     
-    data.name = GS::UniString::Printf("Floor %d", displayFloorNum);
+    data.name = GS::UniString::Printf("%d 階", displayFloorNum);
     // --- ここまで修正 ---
 
     result.Push(data);

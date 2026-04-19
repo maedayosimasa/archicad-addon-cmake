@@ -24,21 +24,6 @@ set (AddOnResourcesFolder .)
 
 set (PCH_HEADER "Src/ExamplePrecompiledHeader.hpp")
 
-# ✔ 使用モジュール（このままでOK）
-set (AC_ADDON_USED_MODULES
-    DialogManager
-    GSRoot
-    InputOutput
-)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# ✔ これが全てを構築する（最重要）
-GenerateAddOnProject (
-    CMakeTarget
-    ${AC_VERSION}
-    "${AC_API_DEVKIT_DIR}"
-    ${AddOnSourcesFolder}
-    ${AddOnResourcesFolder}
-    ${AC_ADDON_LANGUAGE}
-    ${addOnDefaultLanguage}
-    ${PCH_HEADER}
-)
+GenerateAddOnProject (CMakeTarget ${AC_VERSION} "${AC_API_DEVKIT_DIR}" ${AddOnSourcesFolder} ${AddOnResourcesFolder} ${AC_ADDON_LANGUAGE} ${addOnDefaultLanguage} ${PCH_HEADER})

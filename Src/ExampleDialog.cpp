@@ -83,7 +83,7 @@ void ExampleDialog::ButtonClicked (const DG::ButtonClickEvent& ev)
         }
 
         if (allFound.IsEmpty ()) {
-            DG::ErrorAlert ("Search results", "No elements found.", "OK");
+            DG::ErrorAlert ("検索結果", "要素が見つかりませんでした。", "OK");
             return;
         }
 

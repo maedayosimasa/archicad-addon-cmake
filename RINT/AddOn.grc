@@ -1,44 +1,50 @@
-﻿#include "ResourceIds.hpp"
-
 /* ========================================================================= */
-/* 1. アドオン情報                                                           */
+/* Add-on Info                                                               */
 /* ========================================================================= */
 'STR#' 32000 "Add-on Name and Description" {
-/* [  1] */		"maeda AddOn"
-/* [  2] */		"maeda AddOn Description v-002"
+    /* [1] */ "maeda AddOn"
+    /* [2] */ "maeda AddOn Description v-002"
 }
 
 /* ========================================================================= */
-/* 2. メニュー                                                               */
+/* Menu                                                                      */
 /* ========================================================================= */
 'STR#' 32500 "Menu Strings" {
-/* [  1] */		"maeda_AddOn"
-/* [  2] */		"maeda Search Dialog..."
+    /* [1] */ "maeda_AddOn"
+    /* [2] */ "maeda Search Dialog..."
 }
 
-
-'GDLG' 32501 Modal | noGrow 40 40 450 250 "Element Property List" {
-    /* MultiSelList  x   y   dx   dy   fontSpec   partItems      scrollType  itemSize  headerFlag  headerSize */
-    /* MultiSelList    10  245  580  225  LargePlain  PartialItems   VScroll     24        HasHeader   22 */
-
-    Button  330 200 90 25 LargePlain "Search"
-
-    CheckBox  10 80 230 20 LargePlain "Walls"
-    CheckBox  10 100 230 20 LargePlain "Columns"
-    CheckBox  10 120 230 20 LargePlain "Beams"
-    CheckBox  10 140 230 20 LargePlain "Slabs"
-    CheckBox  10 160 230 20 LargePlain "Windows / Doors"
-    CheckBox  10 180 230 20 LargePlain "Objects"
-
-    CheckBox  10 10 230 15 LargePlain "Story1"
-    CheckBox  10 25 230 15 LargePlain "Story2"
-    CheckBox  10 40 230 15 LargePlain "Story3"
-    CheckBox  10 55 230 15 LargePlain "Story4"
+/* ========================================================================= */
+/* Search Dialog Strings 'STR#'                                              */
+/* ========================================================================= */
+'STR#' 32501 "Search Dialog Strings" {
+    /* [1] */ "Search"
+    /* [2] */ "Walls"
+    /* [3] */ "Columns"
+    /* [4] */ "Beams"
+    /* [5] */ "Slabs"
+    /* [6] */ "Windows / Doors"
+    /* [7] */ "Objects"
+    /* [8] */ "Story 1"
+    /* [9] */ "Story 2"
+    /* [10] */ "Story 3"
+    /* [11] */ "Story 4"
 }
 
-'GDLG' 32502 Modal | grow   0   0  800  400  "Search Results List" {
-    /* (1) 結果リスト */
-    MultiSelList   10   10  780  340  LargePlain   PartialItems   HVScroll     24        HasHeader   22
-    /* (2) 閉じるボタン */
-    Button        700  360   90   30  LargePlain "return"
+/* ========================================================================= */
+/* Result Dialog Strings 'STR#'                                              */
+/* ========================================================================= */
+'STR#' 32502 "Result Dialog Strings" {
+    /* [1] */ "Search Results"
+    /* [2] */ "Return"
+}
+
+/* ========================================================================= */
+/* Result List Header Strings                                                */
+/* ========================================================================= */
+'STR#' 32503 "Result Header Strings" {
+    /* [1] */ "GUID"
+    /* [2] */ "Type"
+    /* [3] */ "Story"
+    /* [4] */ "Element ID / Category"
 }

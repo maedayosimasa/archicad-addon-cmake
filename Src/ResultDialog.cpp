@@ -34,12 +34,12 @@ void ResultDialog::PanelOpened (const DG::PanelOpenEvent&)
     resultList.SetTabFieldProperties (4, 455, 780, DG::ListBox::Left, DG::ListBox::EndTruncate, true);
 
     resultList.SetHeaderItemText (1, "GUID");
-    resultList.SetHeaderItemText (2, "Type");
-    resultList.SetHeaderItemText (3, "Story");
-    resultList.SetHeaderItemText (4, "Element ID / Category");
+    resultList.SetHeaderItemText (2, "タイプ");
+    resultList.SetHeaderItemText (3, "フロア");
+    resultList.SetHeaderItemText (4, "要素ID / カテゴリ");
 
-    // 件数をタイトルに表示
-    this->SetTitle (GS::UniString::Printf ("Search Results List - %u items found", displayData.GetSize ()));
+    // ウィンドウタイトルをセット
+    this->SetTitle (GS::UniString::Printf ("検索結果リスト - %u 個の要素が見つかりました", displayData.GetSize ()));
 
     // データの流し込み
     for (const auto& info : displayData) {
@@ -50,7 +50,7 @@ void ResultDialog::PanelOpened (const DG::PanelOpenEvent&)
         resultList.SetTabItemText (row, 2, info.typeName);
         
         Int32 displayFloor = (info.floorInd >= 0) ? (info.floorInd + 1) : info.floorInd;
-        resultList.SetTabItemText (row, 3, GS::UniString::Printf("Floor %d", displayFloor));
+        resultList.SetTabItemText (row, 3, GS::UniString::Printf("%d 階", displayFloor));
         resultList.SetTabItemText (row, 4, info.status);
     }
 

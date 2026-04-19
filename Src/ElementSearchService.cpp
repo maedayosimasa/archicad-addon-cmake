@@ -60,7 +60,7 @@ GS::Array<ElementInfo> ElementSearchService::SearchElements (API_ElemTypeID type
         }
 
         // 結合して 4列目(Status) に表示する
-        info.status = GS::UniString::Printf ("ID: %T | Cat: %T", elementID.ToPrintf (), catStr.ToPrintf ());
+        info.status = GS::UniString::Printf ("ID: %T | カテゴリ: %T", elementID.ToPrintf (), catStr.ToPrintf ());
 
         results.Push (info);
     }
