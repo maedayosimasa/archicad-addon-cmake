@@ -1,8 +1,15 @@
-'MDID' 32500 "Add-On Identifier" {
-	1 /* Set as your developer id. */
-	1 /* Set as your local id. */
+﻿#include "ResourceIds.hpp"
+
+'MDID' ID_ADDON_MDID "Add-On Identifier" {
+	11
+	11
 }
 
-'GICN' 10001 "AddOnIcon" {
-	"AddOnIcon"
+
+/* ダイアログレイアウト */
+'GDLG' ID_ADDON_DLG Modal | noGrow 40 40 450 150 "" {
+    /* [  1] */ Button      330 110  90  25  LargePlain ""
+	/* [  2] */ Button      230 110  90  25  LargePlain ""
+    /* [  3] */ Separator    10 100 430  2
+    /* [  4] */ Button       10  10 430  35  LargePlain ""
 }

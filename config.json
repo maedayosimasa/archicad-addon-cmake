@@ -1,14 +1,14 @@
-{
-    "addOnName": "ExampleAddOn",
-    "defaultLanguage": "INT",
+﻿{
+    "addOnName": "maedaAddOnPyqt",
+    "defaultLanguage": "JPN",
     "languages": [
         "INT",
         "JPN"
     ],
-    "version": "0.0.0",
+    "version": "1.0.0",
     "copyright": {
-        "name": "Graphisoft SE",
-        "year": "1984-%Y"
+        "name": "maeda",
+        "year": "2026"
     },
-    "description": "Example Archicad addon"
+    "description": "maeda AddOn Oyqt Description v-001"
 }

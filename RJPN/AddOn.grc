@@ -1,22 +1,21 @@
 ﻿#include "ResourceIds.hpp"
 
-'STR#' ID_ADDON_INFO "Add-on Name and Description" {
-/* [  1] */		"サンプルアドオン"
-/* [  2] */		"サンプルアドオンの説明..."
+'STR#' 32000 "Add-on Name and Description" {
+/* [  1] */ "maedaアドオンpyqt "
+/* [  2] */ "maedaアドオンpyqt 説明 v-002 "
 }
 
-'STR#' ID_ADDON_MENU "Strings for the Menu" {
-/* [  1] */		"サンプルアドオンコマンド... ^E3 ^ES ^EE ^EI ^ED ^ET ^10001"
+'STR#' 32500 "Menu Strings" {
+/* [  1] */ "maedaアドオンpyqt "
+/* [  2] */ "maeda検索pyqt "
 }
 
-'GDLG' ID_ADDON_DLG Modal | grow   40   40  345  128  "" {
-/* [  1] */ Button				  245   95   90   23	LargePlain  "OK"
-	/* [  2] */ Button				  145   95   90   23	LargePlain  "キャンセル"
-/* [  3] */ Separator			   10   83  325    2
-}
-
-'DLGH' ID_ADDON_DLG DLG_Example {
-1	""		Button_0
-2	""		Button_1
-3	""		Separator_0
+/* ダイアログ用の文字列定義 (ID: 32501) */
+/* インデックス1: タイトル, 2: 1番目のボタン, ... */
+'STR#' ID_ADDON_DLG "Dialog Text List" {
+/* [  1] */ "maeda 検索アドオン "    /* ダイアログのタイトル */
+/* [  2] */ "OK "                   /* 項目[1] (Button) の文字 */
+/* [  3] */ "Cancel "               /* 項目[2] (Button) の文字 */
+/* [  4] */ ""                     /* 項目[3] (Separator) 用の空行（重要！） */
+/* [  5] */ "構成取得 "             /* 項目[4] (Button) の文字 */
 }
