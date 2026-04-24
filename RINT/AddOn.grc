@@ -1,11 +1,16 @@
-﻿#include "ResourceIds.hpp"
+/* RINT/AddOn.grc */
 
 'STR#' 32000 "Add-on Name and Description" {
+<<<<<<< HEAD
 /* [  1] */ "maedaAddOnpyqt "
+=======
+/* [  1] */ "maeda AddOn "
+>>>>>>> 46709cb52b9c45aedd326ef7cf92c251a0dc5cbf
 /* [  2] */ "maeda AddOn Description v-002 "
 }
 
 'STR#' 32500 "Menu Strings" {
+<<<<<<< HEAD
 /* [  1] */ "maeda AddOn pyqt "
 /* [  2] */ "maedaSearch pyqt "
 }
@@ -17,3 +22,31 @@
 /* [  4] */ ""
 /* [  5] */ "Get Configuration"
 }
+=======
+/* [  1] */ "maeda AddOn "
+/* [  2] */ "maeda Search Dialog... "
+}
+
+/* Search Dialog (32501) Strings */
+'STR#' 32501 "Search Dialog Strings" {
+/* [  1] */ "Start Search "
+/* [  2] */ "Walls "
+/* [  3] */ "Columns "
+/* [  4] */ "Beams "
+/* [  5] */ "Slabs "
+/* [  6] */ "Windows / Doors "
+/* [  7] */ "Objects "
+/* [  8] */ "Story B1 "
+/* [  9] */ "Story 1 "
+/* [ 10] */ "Story 2 "
+/* [ 11] */ "Story 3 "
+/* [ 12] */ "Search Settings "
+}
+
+/* Result Dialog (32502) Strings */
+'STR#' 32502 "Result Dialog Strings" {
+/* [  1] */ "Search Result List "
+/* [  2] */ "Close "
+/* [  3] */ "Search Results "
+}
+>>>>>>> 46709cb52b9c45aedd326ef7cf92c251a0dc5cbf
