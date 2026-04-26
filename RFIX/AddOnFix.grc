@@ -1,15 +1,22 @@
-﻿#include "ResourceIds.hpp"
+/* RFIX/AddOnFix.grc */
 
-'MDID' ID_ADDON_MDID "Add-On Identifier" {
+#include "ResourceIds.hpp"
+
+'MDID' 32500 "Add-On Identifier" {
 	11
 	11
 }
 
-
-/* ダイアログレイアウト */
+/* Main Dialog Layout */
 'GDLG' ID_ADDON_DLG Modal | noGrow 40 40 450 150 "" {
-    /* [  1] */ Button      330 110  90  25  LargePlain ""
-	/* [  2] */ Button      230 110  90  25  LargePlain ""
-    /* [  3] */ Separator    10 100 430  2
-    /* [  4] */ Button       10  10 430  35  LargePlain ""
+    /* [  1] */ Button      330 110  90  25  LargePlain ""   /* Search */
+	/* [  2] */ Button      230 110  90  25  LargePlain ""   /* Cancel */
+    /* [  3] */ Separator    10 100 430  2               /* Separator */
+    /* [  4] */ Button       10  10 430  35  LargePlain ""   /* Get Configuration */
+}
+
+/* Result Dialog Layout (Required by ResultDialog.cpp) */
+'GDLG' ID_RESULT_DIALOG Modal | grow 0 0 800 400 "" {
+    /* [ 1] */ MultiSelList    10  10 780 340  LargePlain  PartialItems  HVScroll 24 HasHeader 22
+    /* [ 2] */ Button          700 360  90  30  LargePlain  ""
 }

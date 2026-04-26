@@ -1,9 +1,22 @@
 #ifndef RESOURCEIDS_HPP
 #define RESOURCEIDS_HPP
 
-#define ID_ADDON_INFO		32000
-#define ID_ADDON_MDID		32500
-#define ID_ADDON_MENU		32500
-#define ID_ADDON_DLG		32501
+#pragma warning(disable : 4819)
+
+#define ID_ADDON_INFO               32000
+#define ID_ADDON_MENU               32500
+
+// Search Dialog (32501)
+#define ID_ADDON_DLG                32501
+#define ID_SEARCH_DIALOG            32501
+#define SearchButtonID              1
+#define CancelButtonID              2
+#define SeparatorID                 3
+#define GetConfigButtonID           4
+
+// Legacy IDs for ResultDialog.cpp
+#define ID_RESULT_DIALOG            32502
+#define ResultListID                1
+#define CloseButtonID               2
 
 #endif

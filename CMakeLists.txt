@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.19)
+﻿cmake_minimum_required (VERSION 3.19)
 
 include (Tools/CMakeCommon.cmake)
 
@@ -16,6 +16,10 @@ ReadConfigJson ()
 set (AC_ADDON_LANGUAGE "${addOnDefaultLanguage}" CACHE STRING "Add-On language code.")
 
 project (${addOnName}-${AC_VERSION})
+
+if (MSVC)
+    add_compile_options(/utf-8)
+endif ()
 
 set (AC_ADDON_FOR_DISTRIBUTION OFF CACHE BOOL "")
 

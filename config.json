@@ -1,14 +1,14 @@
-﻿{
+{
     "addOnName": "maedaAddOnPyqt",
-    "defaultLanguage": "JPN",
-    "languages": [
-        "INT",
-        "JPN"
-    ],
     "version": "1.0.0",
+    "description": "maeda AddOn Pyqt Description v-001",
     "copyright": {
         "name": "maeda",
         "year": "2026"
     },
-    "description": "maeda AddOn Oyqt Description v-001"
+    "defaultLanguage": "JPN",
+    "languages": [
+        "INT",
+        "JPN"
+    ]
 }

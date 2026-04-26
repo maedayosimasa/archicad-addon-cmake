@@ -1,21 +1,26 @@
-﻿#include "ResourceIds.hpp"
+/* RJPN/AddOn.grc */
 
-'STR#' 32000 "Add-on Name and Description" {
+#include "ResourceIds.hpp"
+
+'STR#' ID_ADDON_INFO "Add-on Name and Description" {
 /* [  1] */ "maedaアドオンpyqt "
 /* [  2] */ "maedaアドオンpyqt 説明 v-002 "
 }
 
-'STR#' 32500 "Menu Strings" {
+'STR#' ID_ADDON_MENU "Menu Strings" {
 /* [  1] */ "maedaアドオンpyqt "
 /* [  2] */ "maeda検索pyqt "
 }
 
-/* ダイアログ用の文字列定義 (ID: 32501) */
-/* インデックス1: タイトル, 2: 1番目のボタン, ... */
 'STR#' ID_ADDON_DLG "Dialog Text List" {
-/* [  1] */ "maeda 検索アドオン "    /* ダイアログのタイトル */
-/* [  2] */ "OK "                   /* 項目[1] (Button) の文字 */
-/* [  3] */ "Cancel "               /* 項目[2] (Button) の文字 */
-/* [  4] */ ""                     /* 項目[3] (Separator) 用の空行（重要！） */
-/* [  5] */ "構成取得 "             /* 項目[4] (Button) の文字 */
+/* [  1] */ "maeda 検索アドオン "
+/* [  2] */ "検索開始 "
+/* [  3] */ "キャンセル "
+/* [  4] */ "構成取得 "
+}
+
+'STR#' ID_RESULT_DIALOG "Result Dialog Text" {
+/* [  1] */ "検索結果リスト "
+/* [  2] */ "閉じる "
+/* [  3] */ "検索結果 "
 }

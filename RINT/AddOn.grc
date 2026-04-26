@@ -1,52 +1,26 @@
 /* RINT/AddOn.grc */
 
-'STR#' 32000 "Add-on Name and Description" {
-<<<<<<< HEAD
-/* [  1] */ "maedaAddOnpyqt "
-=======
-/* [  1] */ "maeda AddOn "
->>>>>>> 46709cb52b9c45aedd326ef7cf92c251a0dc5cbf
-/* [  2] */ "maeda AddOn Description v-002 "
+#include "ResourceIds.hpp"
+
+'STR#' ID_ADDON_INFO "Add-on Name and Description" {
+/* [  1] */ "maedaAddOnpyqt"
+/* [  2] */ "maeda AddOn Description v-002"
 }
 
-'STR#' 32500 "Menu Strings" {
-<<<<<<< HEAD
-/* [  1] */ "maeda AddOn pyqt "
-/* [  2] */ "maedaSearch pyqt "
+'STR#' ID_ADDON_MENU "Menu Strings" {
+/* [  1] */ "maeda AddOn pyqt"
+/* [  2] */ "maedaSearch pyqt"
 }
 
 'STR#' ID_ADDON_DLG "Dialog Text List" {
 /* [  1] */ "maeda Search AddOn"
-/* [  2] */ "OK"
+/* [  2] */ "Search"
 /* [  3] */ "Cancel"
-/* [  4] */ ""
-/* [  5] */ "Get Configuration"
-}
-=======
-/* [  1] */ "maeda AddOn "
-/* [  2] */ "maeda Search Dialog... "
+/* [  4] */ "Get Configuration"
 }
 
-/* Search Dialog (32501) Strings */
-'STR#' 32501 "Search Dialog Strings" {
-/* [  1] */ "Start Search "
-/* [  2] */ "Walls "
-/* [  3] */ "Columns "
-/* [  4] */ "Beams "
-/* [  5] */ "Slabs "
-/* [  6] */ "Windows / Doors "
-/* [  7] */ "Objects "
-/* [  8] */ "Story B1 "
-/* [  9] */ "Story 1 "
-/* [ 10] */ "Story 2 "
-/* [ 11] */ "Story 3 "
-/* [ 12] */ "Search Settings "
+'STR#' ID_RESULT_DIALOG "Result Dialog Text" {
+/* [  1] */ "Result List"
+/* [  2] */ "Close"
+/* [  3] */ "Results"
 }
-
-/* Result Dialog (32502) Strings */
-'STR#' 32502 "Result Dialog Strings" {
-/* [  1] */ "Search Result List "
-/* [  2] */ "Close "
-/* [  3] */ "Search Results "
-}
->>>>>>> 46709cb52b9c45aedd326ef7cf92c251a0dc5cbf
