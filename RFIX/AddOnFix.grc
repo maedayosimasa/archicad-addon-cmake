@@ -8,7 +8,7 @@
 }
 
 /* Main Dialog Layout */
-'GDLG' ID_ADDON_DLG Modal | noGrow 40 40 450 150 "" {
+'GDLG' ID_ADDON_DLG Palette | close | noGrow 40 40 450 150 "" {
     /* [  1] */ Button      330 110  90  25  LargePlain ""   /* Search */
 	/* [  2] */ Button      230 110  90  25  LargePlain ""   /* Cancel */
     /* [  3] */ Separator    10 100 430  2               /* Separator */
