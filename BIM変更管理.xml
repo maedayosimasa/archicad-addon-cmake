@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<GraphicOverrideSettings>
+	<Version>3</Version>
+	<OverrideRuleGroups>
+		<OverrideRuleGroup>
+			<Name>BIM変更管理</Name>
+			<OverrideRule>
+				<Name>BIM変更済</Name>
+				<OverrideRuleStyle>
+					<OverrideLineType>false</OverrideLineType>
+					<LineType>0</LineType>
+					<OverrideLineMarkerTextPen>true</OverrideLineMarkerTextPen>
+					<LineMarkerTextPen>20</LineMarkerTextPen>
+					<OverrideFillType>false</OverrideFillType>
+					<FillType>0</FillType>
+					<OverrideCutFillType>true</OverrideCutFillType>
+					<OverrideCoverFillType>true</OverrideCoverFillType>
+					<OverrideDraftFillType>false</OverrideDraftFillType>
+					<OverrideFillFGPen>true</OverrideFillFGPen>
+					<FillFGPen>20</FillFGPen>
+					<OverrideCutFillFGPen>true</OverrideCutFillFGPen>
+					<OverrideCoverFillFGPen>true</OverrideCoverFillFGPen>
+					<OverrideDraftFillFGPen>true</OverrideDraftFillFGPen>
+					<OverrideFillBGPen>false</OverrideFillBGPen>
+					<FillBGStyle>
+						<PenIndex>0</PenIndex>
+					</FillBGStyle>
+					<OverrideCutFillBGPen>false</OverrideCutFillBGPen>
+					<OverrideCoverFillBGPen>false</OverrideCoverFillBGPen>
+					<OverrideDraftFillBGPen>false</OverrideDraftFillBGPen>
+					<OverrideSurfaceType>true</OverrideSurfaceType>
+					<OverrideCutSurfaceType>true</OverrideCutSurfaceType>
+					<OverrideUncutSurfaceType>true</OverrideUncutSurfaceType>
+					<SurfaceStyle>
+						<AttributeColor>
+							<Color>
+								<Red>230</Red>
+								<Green>25</Green>
+								<Blue>25</Blue>
+								<Alpha>255</Alpha>
+							</Color>
+						</AttributeColor>
+					</SurfaceStyle>
+					<OverridePenThickness>false</OverridePenThickness>
+					<ContourOverride>false</ContourOverride>
+					<OverrideCutContour>false</OverrideCutContour>
+					<OverrideUncutContour>false</OverrideUncutContour>
+					<ShowSkinSeparators>false</ShowSkinSeparators>
+				</OverrideRuleStyle>
+				<Type>Normal</Type>
+				<CriterionExpression Mv="2" Sv="2">
+					<TextMatchType>1</TextMatchType>
+					<Size>1</Size>
+					<ClassGuid>C6EBD1BD-7702-46FF-8ED9-9CC37648A7C7</ClassGuid>
+					<CompositeCriterion Mv="2" Sv="1">
+						<LogicalOperator>2</LogicalOperator>
+						<CriteriaCount>2</CriteriaCount>
+						<ClassGuid>C6EBD1BD-7702-46FF-8ED9-9CC37648A7C7</ClassGuid>
+						<CompositeCriterion Mv="2" Sv="1">
+							<LogicalOperator>1</LogicalOperator>
+							<CriteriaCount>1</CriteriaCount>
+							<ClassGuid>B4B7B134-EC56-4D40-8D4C-71D7C5A2493A</ClassGuid>
+							<ElemTypeCriterion Mv="2" Sv="3">
+								<VBEF::CritToolType Mv="2" Sv="0">
+									<ElemType Mv="1" Sv="0">
+										<ClassId>00000000-0000-0000-0000-000000000000</ClassId>
+										<Variation>0</Variation>
+									</ElemType>
+									<ElemCreatorToolUnID>
+										<MainGuid>00000000-0000-0000-0000-000000000000</MainGuid>
+										<RevGuid>00000000-0000-0000-0000-000000000000</RevGuid>
+									</ElemCreatorToolUnID>
+								</VBEF::CritToolType>
+								<LogicalOperator>1</LogicalOperator>
+							</ElemTypeCriterion>
+						</CompositeCriterion>
+						<ClassGuid>C6EBD1BD-7702-46FF-8ED9-9CC37648A7C7</ClassGuid>
+						<CompositeCriterion Mv="2" Sv="1">
+							<LogicalOperator>1</LogicalOperator>
+							<CriteriaCount>1</CriteriaCount>
+							<ClassGuid>58E4905F-AD57-45F5-8D26-0100000F60BF</ClassGuid>
+							<PropertyCriterion Mv="6" Sv="0">
+								<VBEF::ConditionIO Mv="2" Sv="0">
+									<PropertyDefinitionUserId Version="2">
+										<PrimaryId>1</PrimaryId>
+										<HasGuidId>false</HasGuidId>
+										<Guid>00000000-0000-0000-0000-000000000000</Guid>
+										<HasNameId>true</HasNameId>
+										<Name>ChangeStatus</Name>
+										<PropertyDefinitionGroupUserId Version="2">
+											<PrimaryId>1</PrimaryId>
+											<HasGuidId>false</HasGuidId>
+											<Guid>00000000-0000-0000-0000-000000000000</Guid>
+											<HasNameId>true</HasNameId>
+											<Name>変更フラグ</Name>
+										</PropertyDefinitionGroupUserId>
+									</PropertyDefinitionUserId>
+									<CriteriaOperatorEnum>0</CriteriaOperatorEnum>
+									<Value>
+										<Variant Type="IntVariant">
+											<Status>Normal</Status>
+											<Value>1</Value>
+										</Variant>
+									</Value>
+								</VBEF::ConditionIO>
+							</PropertyCriterion>
+						</CompositeCriterion>
+					</CompositeCriterion>
+				</CriterionExpression>
+			</OverrideRule>
+			<OverrideRule>
+				<Name>BIM確認済</Name>
+				<OverrideRuleStyle>
+					<OverrideLineType>false</OverrideLineType>
+					<LineType>0</LineType>
+					<OverrideLineMarkerTextPen>true</OverrideLineMarkerTextPen>
+					<LineMarkerTextPen>80</LineMarkerTextPen>
+					<OverrideFillType>false</OverrideFillType>
+					<FillType>0</FillType>
+					<OverrideCutFillType>true</OverrideCutFillType>
+					<OverrideCoverFillType>true</OverrideCoverFillType>
+					<OverrideDraftFillType>false</OverrideDraftFillType>
+					<OverrideFillFGPen>true</OverrideFillFGPen>
+					<FillFGPen>80</FillFGPen>
+					<OverrideCutFillFGPen>true</OverrideCutFillFGPen>
+					<OverrideCoverFillFGPen>true</OverrideCoverFillFGPen>
+					<OverrideDraftFillFGPen>true</OverrideDraftFillFGPen>
+					<OverrideFillBGPen>false</OverrideFillBGPen>
+					<FillBGStyle>
+						<PenIndex>0</PenIndex>
+					</FillBGStyle>
+					<OverrideCutFillBGPen>false</OverrideCutFillBGPen>
+					<OverrideCoverFillBGPen>false</OverrideCoverFillBGPen>
+					<OverrideDraftFillBGPen>false</OverrideDraftFillBGPen>
+					<OverrideSurfaceType>true</OverrideSurfaceType>
+					<OverrideCutSurfaceType>true</OverrideCutSurfaceType>
+					<OverrideUncutSurfaceType>true</OverrideUncutSurfaceType>
+					<SurfaceStyle>
+						<AttributeColor>
+							<Color>
+								<Red>25</Red>
+								<Green>204</Green>
+								<Blue>25</Blue>
+								<Alpha>255</Alpha>
+							</Color>
+						</AttributeColor>
+					</SurfaceStyle>
+					<OverridePenThickness>false</OverridePenThickness>
+					<ContourOverride>false</ContourOverride>
+					<OverrideCutContour>false</OverrideCutContour>
+					<OverrideUncutContour>false</OverrideUncutContour>
+					<ShowSkinSeparators>false</ShowSkinSeparators>
+				</OverrideRuleStyle>
+				<Type>Normal</Type>
+				<CriterionExpression Mv="2" Sv="2">
+					<TextMatchType>1</TextMatchType>
+					<Size>1</Size>
+					<ClassGuid>C6EBD1BD-7702-46FF-8ED9-9CC37648A7C7</ClassGuid>
+					<CompositeCriterion Mv="2" Sv="1">
+						<LogicalOperator>2</LogicalOperator>
+						<CriteriaCount>2</CriteriaCount>
+						<ClassGuid>C6EBD1BD-7702-46FF-8ED9-9CC37648A7C7</ClassGuid>
+						<CompositeCriterion Mv="2" Sv="1">
+							<LogicalOperator>1</LogicalOperator>
+							<CriteriaCount>1</CriteriaCount>
+							<ClassGuid>B4B7B134-EC56-4D40-8D4C-71D7C5A2493A</ClassGuid>
+							<ElemTypeCriterion Mv="2" Sv="3">
+								<VBEF::CritToolType Mv="2" Sv="0">
+									<ElemType Mv="1" Sv="0">
+										<ClassId>00000000-0000-0000-0000-000000000000</ClassId>
+										<Variation>0</Variation>
+									</ElemType>
+									<ElemCreatorToolUnID>
+										<MainGuid>00000000-0000-0000-0000-000000000000</MainGuid>
+										<RevGuid>00000000-0000-0000-0000-000000000000</RevGuid>
+									</ElemCreatorToolUnID>
+								</VBEF::CritToolType>
+								<LogicalOperator>1</LogicalOperator>
+							</ElemTypeCriterion>
+						</CompositeCriterion>
+						<ClassGuid>C6EBD1BD-7702-46FF-8ED9-9CC37648A7C7</ClassGuid>
+						<CompositeCriterion Mv="2" Sv="1">
+							<LogicalOperator>1</LogicalOperator>
+							<CriteriaCount>1</CriteriaCount>
+							<ClassGuid>58E4905F-AD57-45F5-8D26-0100000F60BF</ClassGuid>
+							<PropertyCriterion Mv="6" Sv="0">
+								<VBEF::ConditionIO Mv="2" Sv="0">
+									<PropertyDefinitionUserId Version="2">
+										<PrimaryId>1</PrimaryId>
+										<HasGuidId>false</HasGuidId>
+										<Guid>00000000-0000-0000-0000-000000000000</Guid>
+										<HasNameId>true</HasNameId>
+										<Name>ChangeStatus</Name>
+										<PropertyDefinitionGroupUserId Version="2">
+											<PrimaryId>1</PrimaryId>
+											<HasGuidId>false</HasGuidId>
+											<Guid>00000000-0000-0000-0000-000000000000</Guid>
+											<HasNameId>true</HasNameId>
+											<Name>変更フラグ</Name>
+										</PropertyDefinitionGroupUserId>
+									</PropertyDefinitionUserId>
+									<CriteriaOperatorEnum>0</CriteriaOperatorEnum>
+									<Value>
+										<Variant Type="IntVariant">
+											<Status>Normal</Status>
+											<Value>2</Value>
+										</Variant>
+									</Value>
+								</VBEF::ConditionIO>
+							</PropertyCriterion>
+						</CompositeCriterion>
+					</CompositeCriterion>
+				</CriterionExpression>
+			</OverrideRule>
+		</OverrideRuleGroup>
+	</OverrideRuleGroups>
+	<OverrideCombination>
+		<Name>BIM変更管理</Name>
+		<ReferencedRule>
+			<RuleName>BIM変更済</RuleName>
+			<RuleGroupName>BIM変更管理</RuleGroupName>
+		</ReferencedRule>
+		<ReferencedRule>
+			<RuleName>BIM確認済</RuleName>
+			<RuleGroupName>BIM変更管理</RuleGroupName>
+		</ReferencedRule>
+	</OverrideCombination>
+</GraphicOverrideSettings>
